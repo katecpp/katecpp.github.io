@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+####Thank you for visiting my online notepad!
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+This is a place where I share my software-related thoughts, describe my projects or create some tutorials. You can expect to read here about C++, Qt library or embedded software development, but also some random stuff may appear here.
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+My nickname katecpp is a concatenation of my name and my favourite language.
