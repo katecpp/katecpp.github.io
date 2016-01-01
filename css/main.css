@@ -28,7 +28,7 @@ a:visited { color: #205caa; }
 .wrap:after { content:""; display:table; }
 .wrap:after { clear: both; }
 .wrap {
-  max-width: 800px;
+  max-width: 700px;
   padding: 0 30px;
   margin: 0 auto;
   zoom: 1;
@@ -181,7 +181,11 @@ a:visited { color: #205caa; }
   margin-top: 5px;
 }
 
-.post-content { margin: 0 0 30px; }
+.post-content {
+  margin: 0 0 30px;
+  opacity: .8;
+  font-size: 17px;
+}
 
 .post-content > * { margin: 20px 0; }
 
@@ -195,6 +199,7 @@ a:visited { color: #205caa; }
   line-height: 1;
   font-weight: 300;
   margin: 40px 0 20px;
+  color: #396a93;
 }
 
 .post-content h2 {
