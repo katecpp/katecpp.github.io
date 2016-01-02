@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Hello to Jekyll, bye to Wordpress.com!"
+title:  "Hello Jekyll, bye Wordpress.com!"
 date:   2016-01-01
 categories: jekyll
 ---
@@ -45,8 +45,15 @@ Wordpress blogs can be followed with one click. I did not found possibility to f
 I don't own the personal domain and it will probably stays this way. When comparing the addresses katecpp.wordpress.com and katecpp.github.io the first one seems for me a little bit better for memorizing and more serious.
 
 ### The migration process
-I found a lot of posts describing the Wordpress to github/Jekyll migration process. These posts was particularly helpful: [How-to: Migrating Blog from WordPress to Jekyll, and Host on Github][girliemac] by girliemac, [How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole][joshualande] by joshualande.
+I found a lot of posts describing the Wordpress to github/Jekyll migration process. These posts was particularly helpful: 
+
+*  [How-to: Migrating Blog from WordPress to Jekyll, and Host on Github][girliemac] by girliemac, 
+
+*  [How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole][joshualande] by joshualande,
+
+*  [Bye Wordpress, hello Jekyll!][jandemooij] by jandemooij.
 
 [minddust]: http://www.minddust.com/post/tags-and-categories-on-github-pages/
 [girliemac]: http://www.girliemac.com/blog/2013/12/27/wordpress-to-jekyll/
 [joshualande]: http://joshualande.com/jekyll-github-pages-poole/
+[jandemooij]: http://jandemooij.nl/blog/2015/10/03/bye-wordpress-hello-jekyll/
