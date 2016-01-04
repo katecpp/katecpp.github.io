@@ -4,6 +4,7 @@ title:  "Cppcheck - free static code analysis"
 permalink: cppcheck
 date:   2015-08-04
 categories: cpp
+tags: [static-analysis]
 ---
 
 CppCheck is a very helpful tool for C++ programmers. It performs the static code analysis of C++ project and discovers some types of error which can be easily overlooked by developers and compilers: out of bounds or uninitialized variables, redundant code, always true/false comparisons, exception safety and many others (all checks are listed <a href="http://sourceforge.net/p/cppcheck/wiki/ListOfChecks">here</a>). If you want to maintain high code quality you should include the static code checks among the development routines.

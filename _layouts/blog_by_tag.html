@@ -1,0 +1,16 @@
+---
+layout: page
+title: Posts by tag
+---
+<div class="post">
+    # {{ page.tag }}
+    <div>
+        {% if site.tags[page.tag] %}
+            {% for post in site.tags[page.tag] %}
+                <a href="{{ post.url }}/">{{ post.title }}</a>
+            {% endfor %}
+        {% else %}
+            <p>There are no posts for this tag.</p>
+        {% endif %}
+    </div>
+</div>
