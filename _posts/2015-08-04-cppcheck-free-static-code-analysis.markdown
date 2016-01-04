@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Cppcheck - free static code analysis"
+permalink: cppcheck
 date:   2015-08-04
 categories: cpp
 ---
