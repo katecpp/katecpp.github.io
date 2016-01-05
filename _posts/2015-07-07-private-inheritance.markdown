@@ -2,7 +2,7 @@
 layout: post
 title:  "Types of inheritance in C++"
 permalink: private-inheritance
-date:   2015-08-04
+date:   2015-08-07
 categories: cpp
 tags: [inheritance]
 ---
@@ -18,21 +18,27 @@ protected:
 private:
     int privateMember;
 };
+{% endhighlight %}
 
+{% highlight cpp %}
 class B : public A
 {
     // publicMember is public
     // protectedMember is protected
     // privateMember is not accessible from B
 };
+{% endhighlight %}
 
+{% highlight cpp %}
 class C : protected A
 {
     // publicMember is protected
     // protectedMember is protected
     // privateMember is not accessible from C
 };
+{% endhighlight %}
 
+{% highlight cpp %}
 class D : private A
 {
     // publicMember is private
@@ -43,15 +49,11 @@ class D : private A
 
 
 ## Public inheritance
-Usage of public inheritance is pretty common and means *is-a* relationship. The derived class can be always used when the base class is needed. In the example below, the DerivedPublic class object is passed to the function which awaits Base class and everything is fine.
+Usage of public inheritance is pretty common and means **is-a** relationship. The derived class can be always used when the base class is needed. In the example below, the DerivedPublic class object is passed to the function which awaits Base class and everything is fine.
 {% highlight cpp %}
-class Base
-{
-};
+class Base {};
 
-class DerivedPublic: public Base 
-{
-};
+class DerivedPublic: public Base {};
 
 void doSmthOnBase(const Base& base){}
 
@@ -62,13 +64,9 @@ doSmthOnBase(d); // great!
 ## Private inheritance
 Would you be able to do the same trick when the derived class inherits privately from Base? Unfortunately **not**. Such piece of code will not compile:
 {% highlight cpp %}
-class Base
-{
-};
+class Base {};
 
-class DerivedPrivate: private Base 
-{
-};
+class DerivedPrivate: private Base {};
 
 void doSmthOnBase(const Base& base){}
 
@@ -79,13 +77,13 @@ doSmthOnBase(d); // error !
 The compiler will complain about error: <em>'Base' is an inaccessible base of 'Derived' doSmthOnBase(d)</em>. 
 That means that, unlike public inheritance, private inheritance is not an "is-a" relationship.
 
-## So what's the use of private inheritance?
+### So what's the use of private inheritance?
 Private inheritance means "has-a" relationship (or: "is implemented in terms of"). Similar to composition, you should use private inheritance when you want to make use of the implementation details of base class, but you do not want to inherit the interface.
 
-## When private inheritance is better than composition?
+### When private inheritance is better than composition?
 You will have to use private inheritance when you need to have access to protected members/member functions of base class. In other cases almost always you should use composition. Private inheritance will make your code harder to maintain and increase the compilation dependencies (in case of composition, you can use forward declaration and a member-pointer to object).
 
-## Empty Base Optimization (EBO)
+### Empty Base Optimization (EBO)
 There is one more specific case when private inheritance can be reasonable: so called Empty Base Optimization. Imagine EmptyClass with zero non-static members and zero virtual functions nor base classes. Composition of EmptyClas will increase the size of OtherClass_composition.
 
 {% highlight cpp %}
@@ -98,7 +96,7 @@ class OtherClass_composition
 };
 {% endhighlight %}
 
-But if you use private inheritance you can save some space.
+But if you use private inheritance you will save some space.
 
 {% highlight cpp %}class OtherClass_inheritance : private EmptyClass
 {   
