@@ -1,0 +1,84 @@
+---
+layout: post
+title:  "Override specifier [C++11]"
+permalink: override
+date:   2015-08-10
+categories: cpp
+tags: [inheritance, c++11]
+---
+<code>Introduced by: C++11</code>
+
+Overriding virtual functions is one of the most important mechanisms of C++ object oriented programming. The derived class method is overriding base class method when following requirements are met:
+<ol>
+	<li> the base class method has <em>virtual</em> keyword,</li>
+	<li>derived class method has:
+<ul>
+	<li>the same name,</li>
+	<li>the same input parameters,</li>
+	<li>the same const-ness,</li>
+	<li>compatible return type.</li>
+</ul>
+</li>
+</ol>
+If at least one of these requirement is not fulfilled, developer can end with not-overriding method and not even know about it. The C++11 standard introduces specifier <em>override</em>, designed for easy detection of such mistakes.
+
+The simply idea of overriding is that the following code should call <em>print</em> function from Derived class:
+{% highlight cpp %}
+class Base
+{
+public:
+virtual void print(int value);
+};
+
+class Derived : public Base
+{
+public:
+void print(int value);
+};
+
+Base* bPointer = new Derived();
+bPointer->print(5);
+{% endhighlight %}
+
+This code definitely will work in the intended way, but let's take a look on a different variations of <em>print</em> method in Derived class. Which one of them -- 1, 2 or 3 -- will override the <em>print</em> from Base class? 
+{% highlight cpp %}
+class Derived : public Base
+{
+public:
+// virtual void print(int value) const;    // 1
+// virtual bool print(int value);          // 2
+// virtual void print(unsigned int value); // 3
+};
+{% endhighlight %}
+The answer is: none of them!
+
+None of these declarations will allow the method <em>print</em> to be overridden (1 - constness, 2 - inconsistent return type, 3 -- inconsistent parameter type). The same thing is if we forget to make <em>print</em> virtual in the Base class. All of these mistakes are easy to do but hard to catch. There are big chances that you will not get any warnings for such implementation. It's not incorrect -- but it probably will not behave the way you wanted.
+
+And here comes C++11 with the new override specifier!
+
+## Override specifier
+Just declare methods in Derived class *override* and the compiler will check for you if there is everything ok with your overriding plans.
+
+{% highlight cpp %}
+class Derived : public Base
+{
+public:
+void print(int value) const override; //error!
+};
+{% endhighlight %}
+
+You will get here compilation error since <em>print</em> is non-const in Base class.
+
+This is how usage of override specifier provides you more safety and allows you to spot bugs early.
+
+### Further reading:
+
++ <a href="http://www.stroustrup.com/C++11FAQ.html#override" target="_blank">Bjarne Stroustrup FAQ: override</a>
+
+#### Override equivalent for Qt
+Qt is not lagging behind C++ standard. Since Qt5 there is available macro <code class="cpp plain">Q_DECL_OVERRIDE</code> which is equal to <code class="cpp plain">override</code> from C++11.
+
+Usage is also analogous, example:
+{% highlight cpp %}
+void print(int value) const Q_DECL_OVERRIDE;
+{% endhighlight %}
