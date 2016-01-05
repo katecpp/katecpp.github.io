@@ -7,8 +7,11 @@ categories: cpp
 tags: [optimization, loop]
 ---
 Code size:   increased
+
 Performance: better
+
 Done by:     developer or compiler
+
 
 Loop unrolling, also known as loop unwinding, is an optimization which can reduce overhead of running a loop --- number of instructions of checking the loop termination condition and loop counter modification. It requires fixed and known loop count.
 
@@ -46,6 +49,7 @@ The answer is: it depends on your compiler abilities and of course your needs (i
 On the other hand there are compilers that do not unroll loops and in that case you could do it manually; especially if the loop body is small. But first do some research with profiler if it's worth it.
 
 <a href="http://www.linux-kongress.org/2009/slides/compiler_survey_felix_von_leitner.pdf">Felix von Leitner</a> summarized it shortly:
-<blockquote><em>Learn what your compiler does, Then let the compiler do it.</blockquote>
+`Learn what your compiler does, Then let the compiler do it.`
+
 
 GCC provides loop unrolling when flag -floop-optimize is enabled (which is true at levels -O, -O2, -O3, -Os).
