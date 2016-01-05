@@ -6,8 +6,6 @@ date:   2015-08-10
 categories: cpp
 tags: [inheritance, c++11]
 ---
-<code>Introduced by: C++11</code>
-
 Overriding virtual functions is one of the most important mechanisms of C++ object oriented programming. The derived class method is overriding base class method when following requirements are met:
 <ol>
 	<li> the base class method has <em>virtual</em> keyword,</li>
@@ -71,7 +69,7 @@ You will get here compilation error since <em>print</em> is non-const in Base cl
 
 This is how usage of override specifier provides you more safety and allows you to spot bugs early.
 
-### Further reading:
+### Further reading
 
 + <a href="http://www.stroustrup.com/C++11FAQ.html#override" target="_blank">Bjarne Stroustrup FAQ: override</a>
 
