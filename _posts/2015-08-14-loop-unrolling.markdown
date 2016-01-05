@@ -6,13 +6,6 @@ date:   2015-08-14
 categories: cpp
 tags: [optimization, loop]
 ---
-Code size:   increased
-
-Performance: better
-
-Done by:     developer or compiler
-
-
 Loop unrolling, also known as loop unwinding, is an optimization which can reduce overhead of running a loop --- number of instructions of checking the loop termination condition and loop counter modification. It requires fixed and known loop count.
 
 For loop executes conditional statement e.g. <code>i < 0</code> and modifies the loop counter e.g <em>i++</em> once per iteration. It is shown in example below --- a simple loop with very small body. To call this body 100 times the loop also executes conditional statement and loop counter incrementation, both 100 times. It means 200 of 300 instructions of this loop are overhead.
