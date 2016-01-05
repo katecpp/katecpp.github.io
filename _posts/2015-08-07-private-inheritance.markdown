@@ -3,7 +3,7 @@ layout: post
 title:  "Types of inheritance in C++"
 permalink: private-inheritance
 date:   2015-08-07
-categories: cpp
+category: cpp
 tags: [inheritance]
 ---
 C++ standard supports three types of inheritance: public, protected and private. One of the main differences is the accessibility of the public and protected members -- their accessibility is narrowed to the type of inheritance. Private members are always not accessible from derived class. The code below presents the members scope depending on the inheritance type.

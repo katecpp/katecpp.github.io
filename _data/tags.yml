@@ -1,3 +1,22 @@
 - slug: static-analysis
   name: static analysis
 
+- slug: qt
+  name: Qt
+  
+- slug: inheritance
+  name: inheritance
+
+- slug: cpp11
+  name: C++11
+  
+- slug: optimization
+  name: optimization
+
+- slug: loops
+  name: loops
+  
+- slug: jekyll
+  name: jekyll
+
+  

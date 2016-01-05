@@ -3,8 +3,8 @@ layout: post
 title:  "Loop unrolling"
 permalink: loop-unrolling
 date:   2015-08-14
-categories: cpp
-tags: [optimization, loop]
+category: cpp
+tags: [optimization, loops]
 ---
 Loop unrolling, also known as loop unwinding, is an optimization which can reduce overhead of running a loop --- number of instructions of checking the loop termination condition and loop counter modification. It requires fixed and known loop count.
 

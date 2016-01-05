@@ -3,7 +3,7 @@ layout: post
 title:  "Hello Jekyll, bye Wordpress.com!"
 permalink: hello-jekyll
 date:   2016-01-01
-categories: jekyll
+category: jekyll
 ---
 
 It's been several months since I started blogging at Wordpress.com. As the time went by I&nbsp;was more and more confident that WP.com is not what I&nbsp;need.

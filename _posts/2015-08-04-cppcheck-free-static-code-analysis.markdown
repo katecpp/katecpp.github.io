@@ -3,7 +3,7 @@ layout: post
 title:  "Cppcheck - free static code analysis"
 permalink: cppcheck
 date:   2015-08-04
-categories: cpp
+category: cpp
 tags: [static-analysis]
 ---
 
@@ -14,21 +14,24 @@ CppCheck works on Linux and Windows. It is a free software under the GNU General
 Download CppCheck from the <a href="http://sourceforge.net/projects/cppcheck/">project page</a> or install <a href="http://installion.co.uk/ubuntu/precise/universe/c/cppcheck/install/index.html">via command line</a>.
 
 ### Usage via console
-Open the console and navigate to project directory.
+Open the console and navigate to the project directory.
    
-+ Check specific file and save the result to .txt file:
-   
-   `cppcheck filename.cpp 2> result.txt`
+**Check specific file and save the result to .txt file**:
+{% highlight bash %}
+cppcheck filename.cpp 2> result.txt
+{% endhighlight %}
 
-+ Check all files in current directory recursively:
-   
-   `cppcheck . 2> result.txt`
+**Check all files in current directory recursively**: 
+{% highlight bash %}
+cppcheck . 2> result.txt
+{% endhighlight %}
+
+**Perform all possible checks**
 
 By default only error messages are shown. To enable more messages use <em>enable</em> flag: `--enable=all` will perform all checks possible. Other possible values are `warning`, `performance`, `information`, `style`, `unusedFunctions`. 
-
-+ The deepest possible check:
-   
-`cppcheck --enable=all filename.cpp 2> result.txt`
+{% highlight bash %}
+cppcheck --enable=all filename.cpp 2> result.txt
+{% endhighlight %}
 
 ### Example result and interpretation
 I have cloned an open-source project <a href="https://github.com/QNapi/qnapi">QNapi</a> and then tested the whole repository with the cppcheck. With the default check (only error level) no deviations were detected. Congratulations for the team :). However I go further and check with `--enable=warning` flag. Now I see 9 warnings about uninitialized variables. Some of them are uninitialized member pointers -- and this thing really deserves correction. Example:

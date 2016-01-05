@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Override specifier [C++11]"
+title:  "Override specifier"
 permalink: override
 date:   2015-08-10
-categories: cpp
-tags: [inheritance, c++11]
+category: cpp
+tags: [inheritance, cpp11]
 ---
 Overriding virtual functions is one of the most important mechanisms of C++ object oriented programming. The derived class method is overriding base class method when following requirements are met:
 <ol>
@@ -69,14 +69,16 @@ You will get here compilation error since <em>print</em> is non-const in Base cl
 
 This is how usage of override specifier provides you more safety and allows you to spot bugs early.
 
-### Further reading
-
-+ <a href="http://www.stroustrup.com/C++11FAQ.html#override" target="_blank">Bjarne Stroustrup FAQ: override</a>
-
-#### Override equivalent for Qt
+### Override equivalent for Qt
 Qt is not lagging behind C++ standard. Since Qt5 there is available macro <code class="cpp plain">Q_DECL_OVERRIDE</code> which is equal to <code class="cpp plain">override</code> from C++11.
 
 Usage is also analogous, example:
 {% highlight cpp %}
 void print(int value) const Q_DECL_OVERRIDE;
 {% endhighlight %}
+
+### Further reading
+
++ <a href="http://www.stroustrup.com/C++11FAQ.html#override" target="_blank">Bjarne Stroustrup FAQ: override</a>
+
+
