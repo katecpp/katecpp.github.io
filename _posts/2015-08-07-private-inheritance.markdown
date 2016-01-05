@@ -9,44 +9,37 @@ tags: [inheritance]
 C++ standard supports three types of inheritance: public, protected and private. One of the main differences is the accessibility of the public and protected members -- their accessibility is narrowed to the type of inheritance. Private members are always not accessible from derived class. The code below presents the members scope depending on the inheritance type.
 
 {% highlight cpp %}
-class A 
+class B : public A
 {
-public:
-    int publicMember;
-protected:
-    int protectedMember;
-private:
-    int privateMember;
+    // public member of A is public
+    // protected member of A is protected
+    // private member of A is not accessible from B
 };
 {% endhighlight %}
 
-{% highlight cpp %}
-class B : public A
-{
-    // publicMember is public
-    // protectedMember is protected
-    // privateMember is not accessible from B
-};
-{% endhighlight %}
+The public and protected members' scope doesn't change when the inheritance is public. Private members can't be accessed from derived class.
 
 {% highlight cpp %}
 class C : protected A
 {
-    // publicMember is protected
-    // protectedMember is protected
-    // privateMember is not accessible from C
+    // public member of A is protected
+    // protected member of A is protected
+    // private member of A is not accessible from C
 };
 {% endhighlight %}
+
+For protected inheritance, the public members become protected and protected members stay protected. This type of inheritance is rarely useful.
 
 {% highlight cpp %}
 class D : private A
 {
-    // publicMember is private
-    // protectedMember is private
-    // privateMember is not accessible from D
+    // public member of A is private
+    // protected member of A is private
+    // private member of A  is not accessible from D
 };
 {% endhighlight %}
 
+Both public and protected members are private in derived class.
 
 ## Public inheritance
 Usage of public inheritance is pretty common and means **is-a** relationship. The derived class can be always used when the base class is needed. In the example below, the DerivedPublic class object is passed to the function which awaits Base class and everything is fine.
