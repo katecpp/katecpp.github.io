@@ -9,7 +9,10 @@
 
 - slug: cpp11
   name: C++11
-  
+
+- slug: cpp14
+  name: C++14
+
 - slug: optimization
   name: optimization
 
