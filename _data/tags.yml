@@ -24,3 +24,6 @@
   
 - slug: json
   name: json
+  
+- slug: cache
+  name: cache
