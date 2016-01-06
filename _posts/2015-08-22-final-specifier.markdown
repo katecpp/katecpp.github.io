@@ -69,7 +69,7 @@ class Derived : public NotBase // error!
 
 ### When it's useful?
 
-Some classes are not intented to be inherited from, like std::vector or std::list, classes without virtual destructor or platform dependent classes.
+Some classes are not intended to be inherited from, like std::vector or std::list, classes without virtual destructor or platform dependent classes.
 
 ## Summary
 
