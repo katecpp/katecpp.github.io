@@ -28,12 +28,16 @@ a:visited { color: #205caa; }
 .wrap:after { content:""; display:table; }
 .wrap:after { clear: both; }
 .wrap {
-  max-width: 700px;
+  max-width: 750px;
   padding: 0 30px;
   margin: 0 auto;
   zoom: 1;
 }
 
+#about {
+    font-size: 17;
+    opacity: 1;
+}
 
 /* Layout Styles */
 /* ----------------------------------------------------------*/
@@ -189,7 +193,7 @@ a:visited { color: #205caa; }
 
 .post-content {
   margin: 0 0 30px;
-  opacity: .8;
+  /* opacity: .8;*/
   font-size: 16px;
 }
 
