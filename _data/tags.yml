@@ -21,3 +21,6 @@
 
 - slug: memory
   name: memory
+  
+- slug: json
+  name: json

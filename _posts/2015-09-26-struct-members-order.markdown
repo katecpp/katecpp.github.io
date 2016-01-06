@@ -24,7 +24,10 @@ struct SRandomOrder
 
 Since the members cannot be re-order by compiler, to achieve proper data alignment this struct will be placed in memory (x86 architecture) like below --- padding is presented as gray fields. The <code>sizeof(SRandomOrder)</code> is equal to 24 bytes. Note there is only 15 bytes of data and 9 bytes of padding!
 
-![Structure with ineffective member placement]({{ site.url }}/assets/post-struct/struct-memory-padding.png)
+<p style="text-align: center">
+<a href="{{ site.url }}/assets/post-struct/struct-memory-padding.png"><img src="{{ site.url }}/assets/post-struct/struct-memory-padding.png" alt="Structure with ineffective member placement" /></a><br>
+<em>Structure with ineffective member placement</em>
+</p>
 
 ### Structure packed
 If the program has strict memory constraints it may be necessary to get rid of this redundant (from business logic point of view) padding. It can be done in two ways; first possibility is to pack the structure.
@@ -44,7 +47,10 @@ struct SRandomOrderPacked
 
 The packed structure takes the minimum of memory space. It's size is 15 bytes and not a single padding is added, but the data alignment rule is violated. The uint64_t member is placed in 3 chunks and the uint32_t is placed in 2 chunks. To load them from memory the computer will need to make more accesses than in previous case; additionally some bit-shifting operations will be performed to get the value of them. It may slow down the program execution on some architectures. On architectures with strict alignment requirements packing structure is impossible.
 
-![Structure packed]({{ site.url }}/assets/post-struct/struct-packed.png)
+<p style="text-align: center">
+<a href="{{ site.url }}/assets/post-struct/struct-packed.png"><img src="{{ site.url }}/assets/post-struct/struct-packed.png" alt="Structure packed" /></a><br>
+<em>Structure packed</em>
+</p>
 
 ### The best order of members
 Another way to save some memory space is to declare members in decreasing order of size. It may remove the padding completely; in this case it's impossible and one byte of padding must be added anyway. As a result, the size of this structure is 16 bytes.
@@ -62,7 +68,10 @@ struct SNiceOrder
 
 In this case the natural data alignment has been preserved.
 
-![Structure with properly ordered members]({{ site.url }}/assets/post-struct/struct-properly-ordered.png)
+<p style="text-align: center">
+<a href="{{ site.url }}/assets/post-struct/struct-properly-ordered.png"><img src="{{ site.url }}/assets/post-struct/struct-properly-ordered.png" alt="Structure with properly ordered members" /></a><br>
+<em>Structure with properly ordered members</em>
+</p>
 
 ## Summary
 <ul>
