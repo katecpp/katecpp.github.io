@@ -30,3 +30,6 @@
   
 - slug: cache
   name: cache
+  
+- slug: tests
+  name: tests
