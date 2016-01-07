@@ -48,26 +48,23 @@ int process()
 {
    int error = 0;
    /* ... */
-   if (currentMsgType == MsgType::error){ /* ... */}
+   if (currentMsgType == MsgType::error){ /* ... */ }
 }
 {% endhighlight %}
 
 Now the risk of name conflict with enumerators reached zero level. The enum class name is required also by creation and initialization of enum values.
 
 {% highlight cpp %}
-   MsgType currentMsgType = MsgType::request;
-   MsgType previousMsgType(MsgType::ack);
+MsgType currentMsgType = MsgType::request;
+MsgType previousMsgType(MsgType::ack);
 {% endhighlight %}
 
 This also allows you to create many enum classes with equal enumerators names. Such code is totally legal and safe --- the names are not conflicting with each other since you use them with enum class name explicitly.
 
 {% highlight cpp %}
-enum class MsgType
-{ request, ack, error };
-enum class ActionType
-{ request, ack, error };
-enum class Status
-{ on, off, error };
+enum class MsgType { request, ack, error };
+enum class ActionType { request, ack, error };
+enum class Status { on, off, error };
 {% endhighlight %}
 
 ### Implicit conversions. Is it what you want?
@@ -129,6 +126,7 @@ public:
 {% endhighlight %}
 
 In conclusion, the forward declaration is possible for both C++98 and C++11 enums, but for enum classes it's a little bit easier.
+
 ### Enum as a struct member
 Another consequence of unknown underlying type appears when the C++98 enum should be a struct member. The struct size can be different when the code is compiled on various machines!
 
