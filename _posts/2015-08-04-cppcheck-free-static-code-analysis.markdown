@@ -7,11 +7,11 @@ category: cpp
 tags: [static-analysis]
 ---
 
-CppCheck is a very helpful tool for C++ programmers. It performs the static code analysis of C++ project and discovers some types of error which can be easily overlooked by developers and compilers: out of bounds or uninitialized variables, redundant code, always true/false comparisons, exception safety and many others (all checks are listed <a href="http://sourceforge.net/p/cppcheck/wiki/ListOfChecks">here</a>). If you want to maintain high code quality you should include the static code checks among the development routines.
+CppCheck is a very helpful tool for C++ programmers. It performs the static code analysis of C++ project and discovers some types of error which can be easily overlooked by developers and compilers: out of bounds or uninitialized variables, redundant code, always true/false comparisons, exception safety and many others (<a href="http://sourceforge.net/p/cppcheck/wiki/ListOfChecks">list of all CppCheck checks</a>). If you want to maintain high code quality you should include the static code checks among the development routines.
 
 ### Setup
 CppCheck works on Linux and Windows. It is a free software under the GNU General Public License.
-Download CppCheck from the <a href="http://sourceforge.net/projects/cppcheck/">project page</a> or install <a href="http://installion.co.uk/ubuntu/precise/universe/c/cppcheck/install/index.html">via command line</a>.
+Download CppCheck from the <a href="http://sourceforge.net/projects/cppcheck/">project page</a> or <a href="http://installion.co.uk/ubuntu/precise/universe/c/cppcheck/install/index.html">install via command line</a>.
 
 ### Usage via console
 Open the console and navigate to the project directory.
@@ -28,7 +28,7 @@ cppcheck . 2> result.txt
 
 **Perform all possible checks**
 
-By default only error messages are shown. To enable more messages use <em>enable</em> flag: `--enable=all` will perform all checks possible. Other possible values are `warning`, `performance`, `information`, `style`, `unusedFunctions`. 
+By default only `error` messages are shown. To enable more messages use <em>enable</em> flag, i.e. `--enable=all` will perform all checks. Other possible values: `warning` (suggestions to prevent bug), `performance` (suggestions for making the code faster), `information` (configuration problems), `style` (it enables warning, performance, portability and style messages), `unusedFunctions` (it should be only enabled when the whole program is scanned). 
 {% highlight bash %}
 cppcheck --enable=all filename.cpp 2> result.txt
 {% endhighlight %}
