@@ -152,18 +152,21 @@ a:visited { color: #205caa; }
 
 .posts { list-style-type: none; }
 
-.posts li { margin-bottom: 30px; }
+.posts li { margin-bottom: 10px; }
 
 .posts .post-link {
-  font-size: 24px;
-  letter-spacing: -1px;
-  line-height: 1;
+  font-size: 22px;
+  margin-bottom: 0;
+  margin-top: 0;
+  /*letter-spacing: -1px;
+  line-height: 1;*/
 }
 
 .posts .post-date {
   display: block;
-  font-size: 15px;
+  font-size: 12px;
   color: #818181;
+  margin-bottom: 0;
 }
 
 
