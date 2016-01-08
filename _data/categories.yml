@@ -3,9 +3,9 @@
   color: '#3498db'
   
 - slug: cpp
-  name: cpp
+  name: C++
   color: '#1abc9c'
   
 - slug: js
-  name: js
+  name: Javascript
   color: '#1abc9c'

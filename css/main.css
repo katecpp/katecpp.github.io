@@ -169,6 +169,11 @@ a:visited { color: #205caa; }
   margin-bottom: 0;
 }
 
+#category-link {
+  letter-spacing: -.5px;
+  font-size: 24px;
+  color: black;
+}
 
 /* Post styles */
 /* ----------------------------------------------------------*/
