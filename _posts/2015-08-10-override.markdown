@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Override and final specifier - C++11 way to avoid inheritance mistakes"
+title:  "Override and final specifier"
+subtitle: "C++11 way to avoid inheritance mistakes"
 permalink: override-and-final
 date:   2015-08-10
 category: cpp
@@ -28,13 +29,13 @@ The simply idea of overriding is that the following code should call <em>print</
 class Base
 {
 public:
-virtual void print(int value);
+    virtual void print(int value);
 };
 
 class Derived : public Base
 {
 public:
-void print(int value);
+    void print(int value);
 };
 
 Base* bPointer = new Derived();
@@ -84,7 +85,7 @@ void print(int value) const Q_DECL_OVERRIDE;
 ## Final specifier
 
 
-Besides of <a href="http://katecpp.github.io/override/">override specifier</a>, which helps with detecting not-really-overriding methods, C++11 introduces also another specifier helpful for working with inheritance: final specifier. This one can be included to function declaration or a class definition when you want to make sure that this method will not be overriden or the class will not be used as a base class.
+Besides of override specifier, C++11 introduces also another specifier helpful for working with inheritance: final specifier. This one can be included to function declaration or a class definition when you want to make sure that this method will not be overriden or the class will not be used as a base class.
 
 ## Usage of final method
 
