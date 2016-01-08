@@ -1,11 +1,15 @@
 ---
 layout: post
-title:  "Override specifier"
-permalink: override
+title:  "Override and final specifier"
+subtitle: "C++11 way to avoid inheritance mistakes"
+permalink: override-and-final
 date:   2015-08-10
 category: cpp
 tags: [inheritance, cpp11]
 ---
+
+## Overriding virtual methods
+
 Overriding virtual functions is one of the most important mechanisms of C++ object oriented programming. The derived class method is overriding base class method when following requirements are met:
 <ol>
 	<li> the base class method has <em>virtual</em> keyword,</li>
@@ -25,13 +29,13 @@ The simply idea of overriding is that the following code should call <em>print</
 class Base
 {
 public:
-virtual void print(int value);
+    virtual void print(int value);
 };
 
 class Derived : public Base
 {
 public:
-void print(int value);
+    void print(int value);
 };
 
 Base* bPointer = new Derived();
@@ -54,7 +58,7 @@ None of these declarations will allow the method <em>print</em> to be overridden
 
 And here comes C++11 with the new override specifier!
 
-## Override specifier
+## Override in C++11
 Just declare methods in Derived class *override* and the compiler will check for you if there is everything ok with your overriding plans.
 
 {% highlight cpp %}
@@ -77,8 +81,79 @@ Usage is also analogous, example:
 void print(int value) const Q_DECL_OVERRIDE;
 {% endhighlight %}
 
-### Further reading
+
+## Final specifier
+
+
+Besides of override specifier, C++11 introduces also another specifier helpful for working with inheritance: final specifier. This one can be included to function declaration or a class definition when you want to make sure that this method will not be overriden or the class will not be used as a base class.
+
+## Usage of final method
+
+Usage is very simple. Just add the specifier `final` after method declaration.
+
+{% highlight cpp %}
+class Base
+{
+    virtual void method() final;
+};
+
+class Derived : public Base
+{
+    void method(); // error!
+};
+{% endhighlight %}
+
+Compiler will report an error, because it's illegal to override final functions.
+
+### When to use it?
+
+The introduction of final method into C++11 raises some questions. If somebody doesn't want to allow to override one function, why did he make it virtual? Wouldn't be better just to remove virtual keyword from the function in the most base class?
+
+The answer is: no, because it's not always possible.
+
+Imagine that you own a base class with some virtual methods you want to override. You do so in class Derived; and from this point, the method should not be overriden in any other class. With `final` specifier you can prevent the method from overriding starting with any class in hierarchy. It is shown in following example:
+
+{% highlight cpp %}
+class Base
+{
+    virtual void method();
+};
+
+class Derived : public Base
+{
+    void method() final;
+};
+
+class SecondDerived : public Derived
+{
+    void method(); // error!
+};
+{% endhighlight %}
+
+The mechanism can be also used by optimization. Calling a virtual function is slower than calling not-virtual function. You can use final method to achieve devirtualization - if you call virtual method from the static object that defined this method as final, the compiler can devirtualize the call and the call has performance of not-virtual method call.
+
+## Usage of final class
+
+When a class is not designed to be a base class, add final specifier after its name. The compilation will fail if somebody will try to inherit such class.
+
+{% highlight cpp %}
+class NotBase final
+{
+};
+
+class Derived : public NotBase // error!
+{
+};
+{% endhighlight %}
+
+### When it's useful?
+
+Some classes are not intended to be inherited from, like std::vector or std::list, classes without virtual destructor or platform dependent classes.
+
+Final specifier is designed for quite specific scenarios. For sure you will not see it very often in the code - the usage is just very particular, in opposite to his sibling `override`, which should be used wherever possible.
+
+## Further reading
 
 + <a href="http://www.stroustrup.com/C++11FAQ.html#override" target="_blank">Bjarne Stroustrup FAQ: override</a>
-
++ <a href="http://www.stroustrup.com/C++11FAQ.html#final" target="_blank">Bjarne Stroustrup FAQ: final</a>
 
