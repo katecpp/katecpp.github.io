@@ -7,7 +7,7 @@ category: cpp
 tags: [inheritance, cpp11]
 ---
 
-# Override specifier
+## Overriding virtual methods
 
 Overriding virtual functions is one of the most important mechanisms of C++ object oriented programming. The derived class method is overriding base class method when following requirements are met:
 <ol>
@@ -80,7 +80,9 @@ Usage is also analogous, example:
 void print(int value) const Q_DECL_OVERRIDE;
 {% endhighlight %}
 
-# Final specifier
+
+## Final specifier
+
 
 Besides of <a href="http://katecpp.github.io/override/">override specifier</a>, which helps with detecting not-really-overriding methods, C++11 introduces also another specifier helpful for working with inheritance: final specifier. This one can be included to function declaration or a class definition when you want to make sure that this method will not be overriden or the class will not be used as a base class.
 
@@ -149,7 +151,7 @@ Some classes are not intended to be inherited from, like std::vector or std::lis
 
 Final specifier is designed for quite specific scenarios. For sure you will not see it very often in the code - the usage is just very particular, in opposite to his sibling `override`, which should be used wherever possible.
 
-# Further reading
+## Further reading
 
 + <a href="http://www.stroustrup.com/C++11FAQ.html#override" target="_blank">Bjarne Stroustrup FAQ: override</a>
 + <a href="http://www.stroustrup.com/C++11FAQ.html#final" target="_blank">Bjarne Stroustrup FAQ: final</a>
