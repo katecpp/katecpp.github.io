@@ -173,12 +173,6 @@ a:visited { color: #205caa; }
     display: inline;
 }
 
-.post-content #category-link {
-  letter-spacing: -.5px;
-  font-size: 24px;
-  color: black;
-}
-
 .post-content #tag-link {
   font-size: 20px;
   margin-right: 15px;
