@@ -56,7 +56,9 @@ I found a lot of posts describing the Wordpress to github/Jekyll migration proce
 
 *  [Bye Wordpress, hello Jekyll!][jandemooij] by jandemooij,
 
-*  [Generating Tag cloud on Jekyll blog without plugin][KanishkKunal] by Kanishk Kunal.
+*  [Generating Tag cloud on Jekyll blog without plugin][KanishkKunal] by Kanishk Kunal,
+
+*  [Building a Better Sitemap.xml with Jekyll][davidensinger] by David Ensinger.
 
 [minddust]: http://www.minddust.com/post/tags-and-categories-on-github-pages/
 [girliemac]: http://www.girliemac.com/blog/2013/12/27/wordpress-to-jekyll/
@@ -64,3 +66,4 @@ I found a lot of posts describing the Wordpress to github/Jekyll migration proce
 [joshualande_2]: http://joshualande.com/short-urls-jekyll/
 [jandemooij]: http://jandemooij.nl/blog/2015/10/03/bye-wordpress-hello-jekyll/
 [KanishkKunal]: http://codingtips.kanishkkunal.in/tag-cloud-jekyll/
+[davidensinger]: http://davidensinger.com/2013/11/building-a-better-sitemap-xml-with-jekyll/
