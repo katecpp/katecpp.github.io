@@ -54,10 +54,13 @@ I found a lot of posts describing the Wordpress to github/Jekyll migration proce
 
 *  [How to Set Short URLs in Jekyll with Github Pages][joshualande_2] by joshualande,
 
-*  [Bye Wordpress, hello Jekyll!][jandemooij] by jandemooij.
+*  [Bye Wordpress, hello Jekyll!][jandemooij] by jandemooij,
+
+*  [Generating Tag cloud on Jekyll blog without plugin][KanishkKunal] by Kanishk Kunal.
 
 [minddust]: http://www.minddust.com/post/tags-and-categories-on-github-pages/
 [girliemac]: http://www.girliemac.com/blog/2013/12/27/wordpress-to-jekyll/
 [joshualande]: http://joshualande.com/jekyll-github-pages-poole/
 [joshualande_2]: http://joshualande.com/short-urls-jekyll/
 [jandemooij]: http://jandemooij.nl/blog/2015/10/03/bye-wordpress-hello-jekyll/
+[KanishkKunal]: http://codingtips.kanishkkunal.in/tag-cloud-jekyll/

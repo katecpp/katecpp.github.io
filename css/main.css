@@ -169,10 +169,24 @@ a:visited { color: #205caa; }
   margin-bottom: 0;
 }
 
-#category-link {
+.post-content #site-tag {
+    display: inline;
+}
+
+.post-content #category-link {
   letter-spacing: -.5px;
   font-size: 24px;
   color: black;
+}
+
+.post-content #tag-link {
+  font-size: 20px;
+  margin-right: 15px;
+  margin-left: 0;
+  margin-bottom: 15px;
+  margin-top: 0;
+  color: black;
+  display: inline;
 }
 
 /* Post styles */
