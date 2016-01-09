@@ -4,6 +4,7 @@ email: kasia.macias@gmail.com
 description: ""
 baseurl: ""
 url: "http://katecpp.github.io"
+production_url: "http://katecpp.github.io"
 twitter_username: katie_cpp
 github_username:  katecpp
 
