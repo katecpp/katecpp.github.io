@@ -45,20 +45,20 @@ During my work on <a href="http://katecpp.github.io/qt-exam-preparations/">the j
 	<li>Load the json data with <code>$.getJSON</code>. Following example is complete script that loads the questions from json to <code>allQuestions</code> array.
 
 {% highlight js %}
-    var allQuestions = new Array();
+var allQuestions = new Array();
     
-    $(function(){
-        $.getJSON('questions.json',function(data){
-            allQuestions = data.quiz;
-            console.log('json loaded successfully');
-        }).error(function(){
+function loadQuestions() {
+    $.getJSON('question.json', function (data) {
+        allQuestions = data.quiz;
+    }).error(function(){
             console.log('error: json not loaded');
         });
     });
+}
 {% endhighlight %}
 
 </li>
-	<li>Now your json data is available in <code>allQuestions</code> array and you can access it, for example:<br>
+<li>Now your json data is available in <code>allQuestions</code> array and you can access it, for example:<br>
 
 {% highlight js %}
 var currentQuestion = allQuestions[0].question;
@@ -68,4 +68,32 @@ var answerA         = allQuestions[0].a;
 
 </li>
 </ol>
-This solution can be developed further with encoding and decoding json.
+
+
+### Using .done callback
+Remember that`$getJSON` runs asynchronously. Such implementation will be not the best idea:
+{% highlight js %}
+loadQuestions();
+printQuestion(allQuestions[0]); 
+// or do anything else what requires allQuestions already loaded
+{% endhighlight %}
+
+It's possible that by the moment of calling `printQuestion` the JSON will not be loaded yet and the allQuestions size will be 0. To ensure that some operations are done after the JSON is fully loaded, use `.done` callback.
+
+{% highlight js %}
+var allQuestions = new Array();
+    
+function loadQuestions() {
+    $.getJSON('question.json', function (data) {
+        allQuestions = data.quiz;
+    })
+    .error(function() {
+        console.log('error: JSON not loaded'); 
+    })
+    .done(function() {
+        console.log( "JSON loaded!" );
+        printQuestion(allQuestions[0]); 
+    });
+}
+
+{% endhighlight %}
