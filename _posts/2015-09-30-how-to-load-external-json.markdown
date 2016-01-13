@@ -71,14 +71,14 @@ var answerA         = allQuestions[0].a;
 
 
 ### Using .done callback
-Remember that`$getJSON` runs asynchronously. Such implementation will be not the best idea:
+Remember that`$.getJSON` runs asynchronously. The code like below doesn't guarantee correct execution. The implementation of `printQuestion` doesn't matter, it just needs to do anything with the `question` argument.
 {% highlight js %}
 loadQuestions();
-printQuestion(allQuestions[0]); 
+printQuestion(allQuestions[0]);
 // or do anything else what requires allQuestions already loaded
 {% endhighlight %}
 
-It's possible that by the moment of calling `printQuestion` the JSON will not be loaded yet and the allQuestions size will be 0. To ensure that some operations are done after the JSON is fully loaded, use `.done` callback.
+It's possible that by the moment of calling `printQuestion` the JSON will not be loaded yet and the allQuestions size will be 0. To ensure that some operations are done after the JSON is fully loaded, use `.done` callback. It's executed when the JSON loading is completed.
 
 {% highlight js %}
 var allQuestions = new Array();
