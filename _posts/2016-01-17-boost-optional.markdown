@@ -271,12 +271,14 @@ If the object was uninitialized, calling the `get()` method or the `->`, `*` ope
 
 + Boost.optional makes your code good-looking, safe and easy to debug.
 
-## References
+## Further reading
 * [Boost.org doc: optional][boostorg], 
-* [The Boost C++ Libraries: boost.optional][theboostcpplib]
+* [The Boost C++ Libraries: boost.optional,][theboostcpplib]
+* [A gotcha with Optional.][gotcha]
 
 [boostorg]: http://www.boost.org/doc/libs/1_57_0/libs/optional/doc/html/index.html
 [theboostcpplib]: http://theboostcpplibraries.com/boost.optional
 [nullref]: http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare
+[gotcha]: https://akrzemi1.wordpress.com/2014/12/02/a-gotcha-with-optional/
 
 
