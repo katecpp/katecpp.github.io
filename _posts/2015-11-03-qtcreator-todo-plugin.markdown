@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "QCreator TODO plugin"
+title:  "QtCreator TODO plugin"
 permalink: qtcreator-todo
 date:   2015-11-03
 category: cpp

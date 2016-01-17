@@ -264,10 +264,10 @@ a:visited { color: #205caa; }
 
 /* Code */
 .post code {
-  padding: .25em .5em;
+  padding: .1em .1em;
   font-size: 100%;
   opacity: 1;
-  background-color: #eef;
+  background-color: white; /*#eef;*/
   border-radius: 3px;
 }
 
@@ -276,7 +276,7 @@ a:visited { color: #205caa; }
   margin-top: 0;
   margin-bottom: 1rem;
   padding: 1rem;
-  /*font-size: .8rem;*/
+  font-size: 90%;
   line-height: 1.4;
   white-space: pre;
   white-space: pre-wrap;

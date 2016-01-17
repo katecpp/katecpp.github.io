@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "boost::optional"
+title:  "What to do when you have no value or boost::optional"
 categories: jekyll
 ---
 ## The need of optional values
