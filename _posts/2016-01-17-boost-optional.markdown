@@ -227,12 +227,13 @@ optional<Object> Pool::getLastObject()
 }
 {% endhighlight %}
 
-There is also another, shorter way to implement this with the use of special two-arguments constructor. The first argument is a condition. The second argument is an initialization value to be used when the condition is true. When the condition is false the object stays uninitialized.
+There is also another, shorter way to implement similar functions with the use of special two-arguments constructor. The first argument is a condition. The second argument is an initialization value to be used when the condition is true. When the condition is false the object stays uninitialized. 
 
 {% highlight cpp %}
 optional<Object> Pool::getLastObject()
 {
-     return optional<Object>{!m_data.empty(), m_data.back()};
+    Object retValue = !m_data.empty() ? m_data.back() : Object();
+    return optional<Object>{!m_data.empty(), retValue};
 }
 {% endhighlight %}
 
