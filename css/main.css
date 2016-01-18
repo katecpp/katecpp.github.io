@@ -312,6 +312,12 @@ a:visited { color: #205caa; }
     margin: 5px;
 }
 
+.social-buttons a:hover {
+    color: black;
+    cursor: pointer; 
+    cursor: hand;
+}
+
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
 
