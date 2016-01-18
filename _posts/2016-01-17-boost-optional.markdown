@@ -26,7 +26,7 @@ class Pool
 public:
     Pool(){}
 
-    Object getLastObject()
+    Object getLastObject() // 1
     {
         return m_data.back(); // Oops! Vector can be empty.
     }
@@ -66,7 +66,7 @@ Don't look at this awful anti-pattern anymore and let's search for valid solutio
 ### Idea 2. Return invalid-object value
 If the collection is empty, return specific invalid-value for the `Object`.
 {% highlight cpp %}
-Object Pool::getLastObject()
+Object Pool::getLastObject() // 2
 {
     if (!m_data.empty())
     {
@@ -96,7 +96,7 @@ There is also performance drawback of this approach -- we need to call the const
 ### Idea 3. Return bool value
 The return value can indicate whether the `Object` value is valid or not. The `Object` is given by reference to function.
 {% highlight cpp %}
-bool Pool::getLastObject(Object& object)
+bool Pool::getLastObject(Object& object) // 3
 {
     if (!m_data.empty())
     {
@@ -135,7 +135,7 @@ class Pool
 public:
     Pool(){}
 
-    Object* getLastObject()
+    Object* getLastObject() // 4
     {
         if (!m_data.empty())
         {
@@ -214,7 +214,7 @@ else
 The implementation of `Pool::getLastObject` with the use of `boost::optional` is presented below. The return type is `optional<Object>`. If the vector was not empty, the `optional<Object>` is initialized with proper value. Otherwise the empty object of type `optional<Object>` is returned.
 
 {% highlight cpp %}
-optional<Object> Pool::getLastObject()
+optional<Object> Pool::getLastObject() // 5
 {
     if (!m_data.empty())
     {
@@ -227,17 +227,16 @@ optional<Object> Pool::getLastObject()
 }
 {% endhighlight %}
 
-There is also another, shorter way to implement similar functions with the use of special two-arguments constructor. The first argument is a condition. The second argument is an initialization value to be used when the condition is true. When the condition is false the object stays uninitialized. 
+The code above has the equivalent shorter form:
 
 {% highlight cpp %}
-optional<Object> Pool::getLastObject()
+optional<Object> Pool::getLastObject() // 6
 {
-    Object retValue = !m_data.empty() ? m_data.back() : Object();
-    return optional<Object>{!m_data.empty(), retValue};
+    return !m_data.empty() ? m_data.back() : optional<Object>{};
 }
 {% endhighlight %}
 
-Now we can get the last object from Pool with the following code. The `m_value` is accessed from `optional<Object>` with the `->` operator (although it's not a pointer). 
+Now we can get the last object from Pool with the following code. The `m_value` is accessed from `optional<Object>` with the `->` operator. 
 {% highlight cpp %}
 Pool pool;
 optional<Object> object = pool.getLastObject();
@@ -257,6 +256,20 @@ std::cout << "The last value is: " << object.get().m_value << std::endl;
 {% endhighlight %}
 
 If the object was uninitialized, calling the `get()` method or the `->`, `*` operators will result in the assertion.
+
+#### Conditional constructor
+
+There is also another way to construct optional objects with the use of special two-arguments constructor: `optional<T>{condition, value}`. The first argument is a condition. The second argument is an initialization value to be used when the condition is true. When the condition is false the object stays uninitialized. 
+
+This method not very useful for the presented case of `getLastObject` since we would repeat the `empty()` check and call the constructor of `Object` unnecessarily (to create the value to be passed as second argument in case the Pool is empty). This constructor is useful when the initialization value already exist or it's built-in type, like `int`:
+
+{% highlight cpp %}
+optional<int> getValue()
+{
+    return optional<int>{condition == true, 5};
+}
+{% endhighlight %}
+
 
 ### Summary
 + Boost.optional is designed for the values that can be initialized as well as uninitialized and both situations are normal,
