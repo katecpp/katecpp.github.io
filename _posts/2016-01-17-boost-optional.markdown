@@ -261,7 +261,7 @@ If the object was uninitialized, calling the `get()` method or the `->`, `*` ope
 
 There is also another way to construct optional objects with the use of special two-arguments constructor: `optional<T>{condition, value}`. The first argument is a condition. The second argument is an initialization value to be used when the condition is true. When the condition is false the object stays uninitialized. 
 
-This method not very useful for the presented case of `getLastObject` since we would repeat the `empty()` check and call the constructor of `Object` unnecessarily (to create the value to be passed as second argument in case the Pool is empty). This constructor is useful when the initialization value already exist or it's built-in type, like `int`:
+This constructor is useful when the initialization value already exist or it's built-in type, like `int`:
 
 {% highlight cpp %}
 optional<int> getValue()
