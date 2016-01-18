@@ -303,6 +303,15 @@ a:visited { color: #205caa; }
 
 .post pre.terminal code { background-color: #333; }
 
+.social-buttons {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.social-buttons a {
+    margin: 5px;
+}
+
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
 
