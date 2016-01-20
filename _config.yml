@@ -1,7 +1,7 @@
 # Site settings
 title: katecpp
 email: kasia.macias@gmail.com
-description: ""
+description: "Blog about software development, C++ and Qt."
 baseurl: ""
 url: "http://katecpp.github.io"
 production_url: "http://katecpp.github.io"
