@@ -4,7 +4,7 @@ title:  "Sqlite with Qt - step by step"
 permalink: sqlite-with-qt
 date:   2015-08-28
 category: cpp
-tags: [qt]
+tags: [qt, how-to]
 ---
 Accessing SQL databases from C++ applications is very simple with Qt library. Here is some short example that presents how to do it. I have chosen <a href="https://www.sqlite.org/" target="_blank">SQLite</a> engine because it's the easiest engine to set up (it requires no server, no configuration...), still it's suitable for the most of possible applications.
 

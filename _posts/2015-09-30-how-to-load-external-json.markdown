@@ -4,7 +4,7 @@ title:  "How to load external .json to array in js"
 permalink: load-json
 date:   2015-09-30
 category: js
-tags: [json]
+tags: [json, how-to]
 ---
 During my work on <a href="http://katecpp.github.io/qt-exam-preparations/">the javascript Qt quiz</a>, I had to decide how to store quiz questions. I have chosen the external json file for that purpose. This post describes this solution.
 <ol>
