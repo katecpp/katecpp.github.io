@@ -19,3 +19,9 @@ Quiz requirements:
 All the questions will be created before I take the Qt Exam -- the content of this Exam is of course confidential and I don't want to take risk that somebody accuses me of inspiration in real questions. Because of that I do not promise that my quiz will guarantee anybody profit during the real exam.
 
 I will publish my quiz once it's finished.
+
+---
+
+#### Follow up
+
+[Qt knowledge quiz released](http://katecpp.github.io/qt-quiz-first-release/)
