@@ -252,13 +252,13 @@ a:visited { color: #205caa; }
 .post-content h2 {
   font-size: 32px;
   letter-spacing: -1.25px;
-  color: #396a93;
+  /* color: #396a93; */
 }
 
 .post-content h3 {
   font-size: 26px;
   letter-spacing: -1px;
-  color: #396a93;
+  /* color: #396a93; */
 }
 
 .post-content h4 {
