@@ -6,11 +6,14 @@ date:   2015-08-04
 category: cpp
 tags: [static-analysis]
 ---
+<div class="centered">
+<img src="{{ site.url }}/assets/post-cppcheck/cppcheck.jpg" height="190" width="600" alt="Cppcheck"/>
+</div>
 
-CppCheck is a very helpful tool for C++ programmers. It performs the static code analysis of C++ project and discovers some types of error which can be easily overlooked by developers and compilers: out of bounds or uninitialized variables, redundant code, always true/false comparisons, exception safety and many others (<a href="http://sourceforge.net/p/cppcheck/wiki/ListOfChecks">list of all CppCheck checks</a>). If you want to maintain high code quality you should include the static code checks among the development routines.
+**CppCheck** is a very helpful tool for C++ programmers. It performs the **static code analysis** of C++ project and discovers some types of error which can be easily overlooked by developers and compilers: out of bounds or uninitialized variables, redundant code, always true/false comparisons, exception safety and many others (<a href="http://sourceforge.net/p/cppcheck/wiki/ListOfChecks">list of all CppCheck checks</a>). If you want to maintain high code quality you should include the static code checks among the development routines.
 
 ### Setup
-CppCheck works on Linux and Windows. It is a free software under the GNU General Public License.
+CppCheck works on Linux and Windows. It is a **free software** under the GNU General Public License.
 Download CppCheck from the <a href="http://sourceforge.net/projects/cppcheck/">project page</a> or <a href="http://installion.co.uk/ubuntu/precise/universe/c/cppcheck/install/index.html">install via command line</a>.
 
 ### Usage via console
