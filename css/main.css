@@ -279,6 +279,10 @@ a:visited { color: #205caa; }
 .post-content ul,
 .post-content ol { padding-left: 20px; }
 
+.centered {
+  text-align: center;
+}
+
 /* Code */
 .post code {
   padding: .1em .1em;
