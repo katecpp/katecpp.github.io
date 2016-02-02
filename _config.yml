@@ -13,3 +13,6 @@ markdown: kramdown
 
 # Pagination
 paginate: 15
+
+gems:
+    [jekyll-paginate]
