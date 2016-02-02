@@ -10,7 +10,6 @@ github_username:  katecpp
 
 # Build settings
 markdown: kramdown
-permalink: pretty
 
 # Pagination
 paginate: 15
