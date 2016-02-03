@@ -9,3 +9,7 @@
 - slug: js
   name: Javascript
   color: '#1abc9c'
+
+- slug: rustlang
+  name: Rustlang
+  color: '#1abc9c'

@@ -15,4 +15,4 @@ markdown: kramdown
 paginate: 15
 
 gems:
-    [jekyll-paginate]
+    [jekyll-paginate, jekyll-redirect-from]

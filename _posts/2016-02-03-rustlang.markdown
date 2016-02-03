@@ -1,0 +1,119 @@
+---
+layout: post
+title:  "C++ developer sees Rustlang for the first time"
+permalink: rustlang
+date:   2016-02-03
+category: rustlang
+---
+
+I decided to learn a **new modern** language. The more **exotic** the better - but honestly, it's not hard to impress me, since during my whole studies and career I only had contact with the most mainstream languages, like C, C++, Java, python and Javascript. First I wanted to choose between **Haskell**, **Clojure** and **Scala**. 
+
+But then I made a Twitter survey and I got the recommendations to try [**Rustlang**](https://www.rust-lang.org/index.html).
+
+Quick look at examples... it looks weird enough. I take it! :)
+
+I liked it at the first sight. **Rust may be the language that the world was waiting for!** (Yes, I know - it is too early for me for such enthusiasm). 
+
+The [documentation](https://doc.rust-lang.org/book/README.html) says:
+
+>  Rust is a systems programming language focused on three goals: **safety**, **speed**, and **concurrency**. It maintains these goals **without having a garbage collector**. 
+
+Looks great. It doesn't have a [garbage collector](http://mortoray.com/2011/03/30/why-garbage-collection-is-not-necessary-and-actually-harmful/) and it gives it a big advantage over the languages which do have GC. It introduces the new level of safety. It has a lot of other assets that I don't know about yet.
+
+**I don't think it will replace C++** because I don't think that any language is able to do it within 10-20 years (don't blame me if I'm wrong). But it may be a proud neighbour of C++ on the shelf with the most beautiful programming languages.
+
+First look on Rust
+---
+These are the things that caught my attention when I started to learn about Rust.
+
+#### Variables are immutable
+
+In Rust, every "variable" - which is called **binding** in fact - is [**immutable by default**](https://doc.rust-lang.org/book/variable-bindings.html#mutability). The binding declaration is presented in the example below. You can't reassign the value of `x` since `x` is *const*!
+
+{% highlight rust %}
+fn main ()
+{
+    let x = 5;
+    x = 3; // It won't compile!
+}
+{% endhighlight %}
+
+To have a binding mutable, add `mut` keyword: `let mut x = 5`.
+
+It's unlike in C++, where you need to add the additional word to have the variable immutable. And I think **Rust** solution is better. It's easy to forget or to skip the "unnecessary" keyword out of laziness. Here, forgetting makes no risk.
+
+I have even heard a gossip that Bjarne said that he would like to have such "inversed const logic" in C++. But did he really said that? I don't know.
+
+#### You can't use uninitialized binding
+Another safety improvement is the compilation error when you try to use [uninitialized binding](https://doc.rust-lang.org/book/variable-bindings.html#initializing-bindings). I also appreciate this feature. Why would anybody want to use uninitialized variables? It's an obvious error so why not stop compilation when it happens.
+
+
+#### Formatting correctness checked at compile time
+Next protection for the careless developer. If you ever had a crash in your application because you used the wrong number of arguments in your `print` function, you will value that. I had such problem and it was really hard to detect all places in the code where the `print` was misformatted (our compiler gave no warnings for that; GCC fortunately gives). Also, the crash was only sporadic. I would really prefer that the code would not compile when the problem was introduced.
+
+And so it is in Rust. It won't allow you to compile incorrect formatting.
+
+{% highlight rust %}
+fn main ()
+{
+    println!("The value is: {}"); // It won't compile!
+}
+{% endhighlight %}
+
+#### The functions declaration order doesn't matter
+You can call the functions before you declare them. This code is correct:
+
+{% highlight rust %}
+fn main ()
+{
+    print_number(5);
+}
+
+fn print_number(x: i32)
+{
+    println!("x is: {}", x);
+}
+{% endhighlight %}
+
+It's against C++ developer expectations, but it doesn't seem to be important.
+
+#### Returning a value from function
+This one is weird.
+
+Returning a value from function is presented in example below:
+
+{% highlight rust %}
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+{% endhighlight %}
+
+No semicolon, no `return` keyword... And some strange arrow. It doesn't look very friendly at the first sight.
+
+If you want to ask what's with the early returns... Good question. Here you should use `return`.
+
+{% highlight rust %}
+fn foo(x: i32) -> i32 {
+    return x;
+
+    // we never run this code!
+    x + 1
+}
+{% endhighlight %}
+
+Further, from the [**Rust book**](https://doc.rust-lang.org/book/functions.html#early-returns), you learn that:
+
+> Using a return as the last line of function works, but is considered poor style.
+
+Hmm. For me the syntax is odd, but it won't make me discouraged.
+
+
+#### My impression on Rust
+
+I am very **positive** about Rust and I consider the **additional safety as the great feature**.
+
+I think the more checks are done during the compilation time the better, as long as the compilation time doesn't exceed the limits. Remember that the time you spend on waiting for your compilation may save you long hours of debugging.
+
+I feel very curious of possibilities of this language and I'm excited about further learning!
+
+
