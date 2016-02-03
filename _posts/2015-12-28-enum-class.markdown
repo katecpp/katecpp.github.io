@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "Enum class. Why should you care?"
-permalink: enum-class
+permalink: enum-class/
 date:   2015-12-28
 category: cpp
 tags: [cpp11]
 ---
 <div class="centered">
-<img src="{{ site.url }}/assets/post-enum/enum-class.jpg" alt="Enum class"/>
+<img src="https://katecpp.github.io/assets/post-enum/enum-class.jpg" alt="Enum class"/>
 </div>
 
 The usage of **enums** is pretty common and it might seem that this language feature is well-known to everybody. And yet, despite the fact that the C++11 standard has almost 4 years, some people are stuck with **old style enum** instead of using the **enum class** version. In this article I will discuss the differences between C++98 enum and C++11 enum class and prove that the latter one is almost always better idea.

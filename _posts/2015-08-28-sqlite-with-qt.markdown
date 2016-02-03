@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Sqlite with Qt - step by step"
-permalink: sqlite-with-qt
+permalink: sqlite-with-qt/
 date:   2015-08-28
 category: cpp
 tags: [qt, how-to]

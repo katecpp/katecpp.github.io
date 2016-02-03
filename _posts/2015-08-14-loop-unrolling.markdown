@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Loop unrolling"
-permalink: loop-unrolling
+permalink: loop-unrolling/
 date:   2015-08-14
 category: cpp
 tags: [optimization, loops]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Qt exam preparations"
-permalink: qt-exam-preparations
+permalink: qt-exam-preparations/
 date:   2015-09-08
 category: general
 tags: [qt]

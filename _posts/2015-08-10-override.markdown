@@ -2,7 +2,7 @@
 layout: post
 title:  "Override and final specifier"
 subtitle: "C++11 way to avoid inheritance mistakes"
-permalink: override-and-final
+permalink: override-and-final/
 date:   2015-08-10
 category: cpp
 tags: [inheritance, cpp11]
