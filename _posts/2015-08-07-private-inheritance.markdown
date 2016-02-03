@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Types of inheritance in C++"
-permalink: private-inheritance
+permalink: private-inheritance/
 date:   2015-08-07
 category: cpp
 tags: [inheritance]
