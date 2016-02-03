@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "QtCreator TODO plugin"
-permalink: qtcreator-todo
+permalink: qtcreator-todo/
 date:   2015-11-03
 category: cpp
 tags: [qt]

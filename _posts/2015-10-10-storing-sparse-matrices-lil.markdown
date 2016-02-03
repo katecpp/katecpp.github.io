@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Storing sparse matrix – list of lists LIL"
-permalink: sparse-matrices-lil
+permalink: sparse-matrices-lil/
 date:   2015-10-10
 category: cpp
 tags: [optimization, memory]

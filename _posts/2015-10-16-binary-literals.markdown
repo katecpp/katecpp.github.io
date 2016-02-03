@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Binary literals"
-permalink: binary-literals
+permalink: binary-literals/
 date:   2015-10-16
 category: cpp
 tags: [cpp14]

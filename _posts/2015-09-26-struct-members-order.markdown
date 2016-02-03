@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Struct members order does make a difference"
-permalink: struct-members-order
+permalink: struct-members-order/
 date:   2015-09-26
 category: cpp
 tags: [optimization, memory]

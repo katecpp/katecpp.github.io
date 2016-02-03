@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Data driven tests with Qt"
-permalink: data-driven-tests-qt
+permalink: data-driven-tests-qt/
 date:   2015-10-24
 category: cpp
 tags: [tests, qt]

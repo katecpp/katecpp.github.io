@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Application settings with QSettings"
-permalink: qsettings
+permalink: qsettings/
 date:   2016-01-23
 category: cpp
 tags: [qt, how-to]

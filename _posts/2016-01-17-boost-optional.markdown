@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "boost::optional. What to do when you have no value"
-permalink: boost-optional
+permalink: boost-optional/
 date:   2016-01-17
 category: cpp
 tags: [boost]

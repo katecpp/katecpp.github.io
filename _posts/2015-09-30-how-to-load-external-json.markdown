@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How to load external .json to array in js"
-permalink: load-json
+permalink: load-json/
 date:   2015-09-30
 category: js
 tags: [json, how-to]

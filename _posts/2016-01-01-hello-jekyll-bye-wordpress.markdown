@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hello Jekyll, bye Wordpress.com!"
-permalink: hello-jekyll
+permalink: hello-jekyll/
 date:   2016-01-01
 category: general
 ---

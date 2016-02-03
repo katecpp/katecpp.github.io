@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Qt knowledge quiz released!"
-permalink: qt-quiz-first-release
+permalink: qt-quiz-first-release/
 date:   2015-11-20
 category: cpp
 tags: [qt]

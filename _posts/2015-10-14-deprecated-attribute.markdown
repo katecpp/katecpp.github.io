@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[[deprecated]] attribute"
-permalink: deprecated-attribute
+permalink: deprecated-attribute/
 description: "Deprecated attribute in C++14 allows to mark methods, variables and other entities whose use is discouraged."
 date:   2015-10-14
 category: cpp

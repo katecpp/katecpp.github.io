@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Improve performance with cache prefetching"
-permalink: cache-prefetching
+permalink: cache-prefetching/
 date:   2015-10-05
 category: cpp
 tags: [optimization, cache, memory]
