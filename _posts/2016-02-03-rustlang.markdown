@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "C++ developer sees Rustlang for the first time"
-permalink: rustlang
+permalink: rustlang/
 date:   2016-02-03
 category: rustlang
 ---
