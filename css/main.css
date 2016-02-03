@@ -294,7 +294,7 @@ img {
   padding: .1em .1em;
   font-size: 100%;
   opacity: 1;
-  background-color: white; /*#eef;*/
+  background-color: #eef; /*code color */
   border-radius: 3px;
 }
 
