@@ -1,14 +1,19 @@
 ---
 layout: post
-title:  "First program in Rust: hangman #1"
+title:  "First program in Rust: hangman"
 permalink: rust-hangman-1/
 date:   2016-03-27
 category: Rustlang
 tags: [hangman, tutorial]
 ---
-Rules of **Hangman game** should be well-known to everybody. The player is guessing a word or sentence letter by letter and if he manage to guess the whole secret sentence the hangman's life is saved. Here is the step by step solution of how I created a very simple Hangman game in Rust.
+Rules of **Hangman game** should be well-known to everybody. The player is guessing a word or sentence letter by letter and if he manage to guess the whole secret sentence the hangman's life is saved. Here is the step by step solution of how I created a very simple Hangman game in Rust to play in console.
 
 *This is my first program in Rust so it very likely that the code is not faultless nor optimal. Feel free to comment if you see some errors!*
+
+<div class="centered">
+<img src="https://github.com/katecpp/Hangman/blob/master/hangman/screenshot/hangman.png?raw=true" alt="Hangman in Rust"/>
+</div>
+
 
 ## 1. Creating a project with Cargo
 
@@ -78,16 +83,106 @@ The `BufReader::lines()` method, called in line 21, returns the iterator over al
 #### Ownership is hard on the beggining
 The important observation comes with lines 24 and 25. The loaded line is printed (24) and then appended to the vector (25). It works. But if you swap the order of line 24 and 25 (first append to vector and then print), the code won't compile. Check it! You will get an error: `error: use of moved value: l`.
 
-I admit, I have seen such errors many times. Many, many times. It's very hard to get used to this **moved values**. The reason of this error is so called [ownership](https://doc.rust-lang.org/book/ownership.html). In a short words, the value becomes **moved** (and thus unusable) when it is passed to function "normally" or assigned (binded) to another object. This is quite complicated and wide topic. In many cases you can avoid the "moved values" by passing the value by [reference](https://doc.rust-lang.org/book/references-and-borrowing.html). 
+I admit, I have seen such errors many times. Many, many times. It's very hard to get used to this **moved values**. The reason of this error is so called [ownership](https://doc.rust-lang.org/book/ownership.html). In a short words, the value becomes **moved** (and thus unusable) when it is passed to function "normally" or assigned (binded) to another object. This is quite complicated and wide topic. In many cases you can avoid the "moved values" by passing the value by [reference](https://doc.rust-lang.org/book/references-and-borrowing.html). Check also: [Why Rust's ownership/borrowing is hard](http://softwaremaniacs.org/blog/2016/02/12/ownership-borrowing-hard/en/).
 
 In line 32, the random secret line is returned, wrapped by the Result Ok. That's all what was needed for the first part of Hangman. The lines are read from file and one line is chosen and returned.
 
 ## 3. Read user guess
 
-Let's start the interaction with user. He should be asked for a letter and the letter should be read and saved.
+Let's start the interaction with user. He should type his guesses in a loop.
+
+{% gist b56baa97cb41cfd5bbbf %}
+
+Player is asked for typing a letter in line 16, and his input is read by function `read_guess()`. Pay attention to the return type of this function: `Option<char>`. If you know C++ the *Option* can remind you of [boost::optional](http://katecpp.github.io/boost-optional/). Such return type is recommended because the user answer can be invalid sometimes and it may not contain any letter.
+
+In line 34 we read the whole line that user types. I wanted to read only a single *char*, but I didn't find the way to do so. If you know how to do it better, let me know! The line is stored in variable *guess*. Then the *guess* is *trim()*-ed, which removes any whitespaces from the line (in case the user typed the whitespaces before his guess) and then the 0-th (first) char is taken from resulted string. The [*nth()* method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.nth) returns the `Option<char>`, because the nth value may not exist.
+
+The basic validation is done in *validate_user_guess* method, which generally only returns true when the user input was a letter and false in all other cases. In line 21 we unwrap the result because we already checked that we can do it.
+
+## 4. Prepare structure for game data
+
+The game data can be kept together in a structure. 
+
+{% highlight rust %}
+struct GameData {
+    secret_line         : String, // the sentence to guess
+    discovered_letters  : String, // all letters given by player
+    lives               : i32,    // lives left until hangman dies
+    status              : String  // latest message to player
+}
+{% endhighlight %}
+
+Also an enum is introduced for deeper validation of user input. We already know that this is letter for sure, but this letter can be either already discovered (and should be skipped), or missed, or correctly discovered.
+
+{% highlight rust %}
+enum UserInputStatus {
+    AlreadyDiscovered,
+    LetterGuessed,
+    LetterMissed,
+}
+
+fn check_user_guess(gd: &GameData, user_guess: char) -> UserInputStatus
+{
+    if gd.discovered_letters.contains(user_guess)
+    {
+        return UserInputStatus::AlreadyDiscovered;
+    }
+
+    if !gd.secret_line.contains(user_guess)
+    {
+        return UserInputStatus::LetterMissed;
+    }
+
+    UserInputStatus::LetterGuessed
+}
+{% endhighlight %}
 
 
-{% gist 2e478eb63b3d45aab60b %}
 
 
+## 5. Beautifying
+
+#### Printing the hangman
+Of course we need to print the hangman. I think the code will explain himself ;).
+
+{% highlight rust %}
+fn print_hangman(gd: &GameData)
+{
+    match gd.lives
+    {
+        0 =>
+        {
+            println!(" _________   ");
+            println!("|         |  ");
+            println!("|         XO ");
+            println!("|        /|\\ ");
+            println!("|        / \\ ");
+            println!("|            ");
+            println!("|            ");
+        }
+
+        // end so on...
+}
+{% endhighlight %}
+
+#### Use some colors
+For a little bit nicer output we can add color to our game. I've done it with the use of [ansi_term crate](https://crates.io/crates/ansi_term). Now the messages to user are red, green or yellow depending on their character. This crate is very easy to use. For example the happy message:
+
+{% highlight rust %}
+let status = format!("You discovered {}", guess_lower);
+gd.status = Green.paint(status).to_string();
+{% endhighlight %}
+
+#### Clear the screen
+This is the feature that I'm afraid will work only on Linux. Everytime the game status is changed I redraw the hangman and all. I think it looks better if the old hangman is removed, so I clear the screen with the solution from here: [davidbegin/clear-terminal](https://github.com/davidbegin/clear-terminal).
+
+{% highlight rust %}
+fn clear()
+{
+  let output = Command::new("clear").output().unwrap_or_else(|e|{
+    panic!("failed to execute process: {}", e)
+  });
+  println!("{}", String::from_utf8_lossy(&output.stdout));
+}
+{% endhighlight %}
 
