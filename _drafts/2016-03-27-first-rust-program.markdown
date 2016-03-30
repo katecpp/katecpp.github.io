@@ -8,7 +8,7 @@ tags: [hangman, tutorial]
 ---
 Rules of **Hangman game** should be well-known to everybody. The player is guessing a word or sentence letter by letter and if he manage to guess the whole secret sentence the hangman's life is saved. Here is the step by step solution of how I created a very simple Hangman game in Rust to play in the console.
 
-*This is my first program in Rust so it very likely that the code is not faultless nor optimal. Feel free to comment if you see some errors!*
+*This is my first program in Rust so it very likely that the code is not faultless nor optimal. Feel free to comment if you see some errors! The whole code can be found on [Github](https://github.com/katecpp/Hangman).*
 
 <div class="centered">
 <img src="https://github.com/katecpp/Hangman/blob/master/hangman/screenshot/hangman.png?raw=true" alt="Hangman in Rust"/>
@@ -97,52 +97,39 @@ Let's start the interaction with user. His job is typing a letter repeatedly unt
 
 The user input is read by function `read_guess()`. The whole line is stored in *guess* variable (I didn't find a way to read only one char). Then the *guess* is *trim()*-ed, which removes any whitespaces from the line (in case the user typed the whitespaces before his guess) and then the first char is taken from resulted string. The [*nth()* method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.nth) returns the `Option<char>`, because the *nth* value may not exist. If you know C++ the *Option* can remind you of [boost::optional](http://katecpp.github.io/boost-optional/). 
 
-The basic validation is done in *validate_user_guess* method, which returns true if the first non-white sign was an alphabetical letter and false in all other cases. In line 21 we unwrap the resulted *user_guess* `Option<char>` (we know it's valid letter since the *validate_user_guess* returned true) and convert the letter to lowercase (the whole part `.to_lowercase().next().unwrap();` could be skipped if you want to distinguish the case).
+The basic validation is done in *validate_user_guess* method, which returns true if the first non-white sign was an alphabetical letter and false in all other cases. In line 21 we unwrap the resulted *user_guess* `Option<char>` (we know it's valid letter since the *validate_user_guess* returned true) and convert the letter to lowercase (the whole part `.to_lowercase().next().unwrap()` could be skipped if you want to distinguish the case).
 
 ## 4. Prepare structure for game data
 
+Let's create a structure that keeps data defining the game state. The fields of GameData are self-explanatory, but if you have doubts refer to comments.
 
+{% gist c7ce75265b4f75107a20c8498f549fd0 %}
 
+Also an enum is introduced for deeper validation of user input. We already have checked if user typed a letter, but this letter can be either **already discovered** (and this choice should be skipped), or **missed** (and we need to decrease the lives number), or **guessed**.
 
+{% gist 953f0a98a5a89323ac726090c5508d95 %}
 
-Also an enum is introduced for deeper validation of user input. We already know that this is letter for sure, but this letter can be either already discovered (and should be skipped), or missed, or correctly discovered.
+#### Display the secret word
+We need to print the secret word with guessed letters discovered and anothers hidden. For this purpose we create a function `format_masked_string`, which replaces all undiscovered letter with sign `_`. It also separates the letters with space for nicer look.
 
+{% gist da9be6f738e114910891ffee8b5a1aaf %}
 
-We also need to print the secret word with guessed letters discovered and anothers hidden. For this purpose we create a function `format_masked_string`, which replaces all undiscovered letter with sign `_`. It also separates the letters with space for nicer look.
-
-
-Now we have all necessary mechanics. 
+### Putting it all together
+Now we have all necessary mechanics. Now we only need to put it all together and enjoy the hangman game.
 
 {% gist 4c7f832a1071a7e804529ba29ad44c2b %}
 
+The game is already playable, but the user interface is poor. 
 
 ## 5. Beautifying
 
 #### Printing the hangman
 Of course we need to print the hangman. I think the code will explain himself ;).
 
-{% highlight rust %}
-fn print_hangman(gd: &GameData)
-{
-    match gd.lives
-    {
-        0 =>
-        {
-            println!(" _________   ");
-            println!("|         |  ");
-            println!("|         XO ");
-            println!("|        /|\\ ");
-            println!("|        / \\ ");
-            println!("|            ");
-            println!("|            ");
-        }
-
-        // end so on...
-}
-{% endhighlight %}
+{% gist bfd38f750642d197dd226c0fa69c6aaf %}
 
 #### Use some colors
-For a little bit nicer output we can add color to our game. I've done it with the use of [ansi_term crate](https://crates.io/crates/ansi_term). Now the messages to user are red, green or yellow depending on their character. This crate is very easy to use. For example the happy message:
+For a little bit nicer output we can add color to our game. I've done it with the use of [ansi_term crate](https://crates.io/crates/ansi_term). Now the messages to user are red, green or yellow depending on their character. This crate is very easy to use. You can save the colorful message to plain String object by calling `to_string` method.
 
 {% highlight rust %}
 let status = format!("You discovered {}", guess_lower);
