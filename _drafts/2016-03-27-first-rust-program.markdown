@@ -6,7 +6,7 @@ date:   2016-03-27
 category: Rustlang
 tags: [hangman, tutorial]
 ---
-Rules of **Hangman game** should be well-known to everybody. The player is guessing a word or sentence letter by letter and if he manage to guess the whole secret sentence the hangman's life is saved. Here is the step by step solution of how I created a very simple Hangman game in Rust to play in console.
+Rules of **Hangman game** should be well-known to everybody. The player is guessing a word or sentence letter by letter and if he manage to guess the whole secret sentence the hangman's life is saved. Here is the step by step solution of how I created a very simple Hangman game in Rust to play in the console.
 
 *This is my first program in Rust so it very likely that the code is not faultless nor optimal. Feel free to comment if you see some errors!*
 
@@ -17,9 +17,9 @@ Rules of **Hangman game** should be well-known to everybody. The player is guess
 
 ## 1. Creating a project with Cargo
 
-As the [Cargo docs](http://doc.crates.io/guide.html#why-cargo-exists) says, *Cargo is a build tool, which creates metadata files for your project, fetches and builds the project's dependencies, builds the project and introduces conventions.*
+As the [Cargo docs](http://doc.crates.io/guide.html#why-cargo-exists) say, *Cargo is a build tool, which creates metadata files for your project, fetches and builds the project's dependencies, builds the project and introduces conventions.*
 
-I wanted to keep my program simple, so first **I decided that I will not use Cargo and I will invoke rustc manually**. I thought it will be easier this way. It was terrible mistake! Soon it became hard or impossible to build the project without Cargo. I needed to include library for *random* and the only one obvious solution for that was to, yes, **use cargo**. So here is my advice: **don't be afraid to use Cargo** from the beggining, since it's really nothing scary and in fact you gain a lot by using it.
+I wanted to keep my program simple, so first **I decided that I will not use Cargo and I will invoke rustc manually**. I thought it will be easier this way. It was a terrible mistake! Soon it became hard or impossible to build the project without Cargo. I needed to include a library for *random* and the only one obvious solution was to add it as the dependency in *Cargo.toml*. So here is my advice: **don't be afraid to use Cargo** from the beginning, since it's really nothing scary and you gain a lot by using it.
 
 #### Here is my **short tutorial** of how to use **Cargo**:
 
@@ -36,29 +36,29 @@ It's not very hard to master these three steps.
 - Nice structure of folders,
 - Initialized git repository with .gitignore file,
 - Implemented *HelloWorld* as a skeleton,
-- Cargo.toml which handles dependencies in easy way. These dependencies will arrive sooner than you think. It seems to be **the most important point**.
+- Cargo.toml which handles dependencies in an easy way. These dependencies will arrive sooner than you think. It seems to be **the most important point**.
 
 Check also: [Day 1 of 24 days of Rust: Cargo](http://zsiciarz.github.io/24daysofrust/book/day1.html).
 
 ## 2. Input sentences
 
-The Hangman game requires some input sentences/words which the player will be guessing. I copied some english proverbs base to text file and removed commas and other punctuation marks. Proverbs are separated with newline sign. Such prepared file is read by the program line by line. Then it randomly chooses one line as a secret line to guess. It can be implemented like presented below.
+The Hangman game requires some input sentences/words which the player will be guessing. I copied some English proverbs base to text file and removed commas and other punctuation marks. Proverbs are separated with newline sign. The program reads from such prepared file line by line and chooses randomly one line as a secret line to guess. The implementation is presented and discussed below.
 
 {% gist c4265069706fe05b4736 %}
 
 ### 2.1 Random number
-To use *random* feature we need to include **rand** crate. This can be done by adding dependency in Cargo.toml file:
+To use the *random* feature we need to include [**rand crate**](https://doc.rust-lang.org/rand/rand/index.html) by adding a dependency in *Cargo.toml* file:
 {% highlight rust %}
 [dependencies]
 rand="0.3.0"
 {% endhighlight %}
-The crate must be also [linked](http://rustbyexample.com/crates/link.html) (line 1) and the **use** declaration must be added (line 3). Now the program is able to choose the random number - this is done in line 30. The [`gen_range`](https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.gen_range) method returns the random number from the given range, in this example the range corresponds to the number of lines read from `input.txt` file.
+The crate must be also [linked](http://rustbyexample.com/crates/link.html) (line 1) and the **use** declaration must be added (line 3). Now the program is able to choose the random number. The [`gen_range`](https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.gen_range) method returns the random number from the given range. Here the range corresponds to the number of lines read from the `input.txt` file.
 
 ### 2.2 Reading from file
-Reading the file requires the **use** declaration from lines 3--6. In the 17 line two things are happening: the file *input.txt* is [opened](https://doc.rust-lang.org/std/fs/struct.File.html#method.open) and the result of this operation is processed by [**try! macro**](http://doc.rust-lang.org/std/result/index.html#the-try-macro). The try! macro is a part of **error handling** in Rust. It does the job for the method it wraps. Let's take a closer look on it.
+Reading the file requires the use declarations from lines 3--6. In the 17 line, two things are happening: the file *input.txt* is [opened](https://doc.rust-lang.org/std/fs/struct.File.html#method.open) and the result of this operation is processed by [**try! macro**](http://doc.rust-lang.org/std/result/index.html#the-try-macro). Then the opened file is passed to the [BufReader object](https://doc.rust-lang.org/std/io/struct.BufReader.html), which provides the methods for the line by line reading. The try! macro is a part of **error handling** in Rust. It does the job for the method call it wraps. Let's take a closer look at it.
 
 ### 2.3 Error handling: try!
-The `File::open` method returns `Result<File>` instead of just `File`. When the given path does not exist it will return *Result Error*. And when the path was valid it will return the *Result Ok* which contains (wraps) the opened file object. To access this file you must do something with the wrapping Result. You can process it with *match*, and provide the path for both possible Results *Ok* and *Err*, like presented in [File::Open chapter of Rust by Example](http://rustbyexample.com/std_misc/file/open.html):
+The `File::open` method returns `Result<File>` instead of just `File`. When the given path does not exist it will return *Result Error*, otherwise it will return the *Result Ok* with the opened file object wrapped. To access this file you must do something with the wrapping Result. You can process it with *match*, and provide the path for both possible Results *Ok* and *Err*, like presented in [Rust by Example](http://rustbyexample.com/std_misc/file/open.html):
 
 {% highlight rust %}
 let mut file = match File::open(&path) {
@@ -70,74 +70,50 @@ let mut file = match File::open(&path) {
 };
 {% endhighlight %}
 
-This solution unfortunately makes your code bigger. 
+Unfortunately, this solution makes your code bigger. 
 
 The **try! macro** handles the situation nicely, without increasing your code size. Here you can see [the code with and without the usage of try!](https://doc.rust-lang.org/std/macro.try!.html). With try! it's much nicer, don't you think?
 
-The try! macro deserves some longer considerations. You can read more about it here: [Module std::result](https://doc.rust-lang.org/std/result/) or here: [Learning to 'try!' things in Rust](http://www.jonathanturner.org/2015/11/learning-to-try-things-in-rust.html).
+Check also: [Module std::result](https://doc.rust-lang.org/std/result/) and [Learning to 'try!' things in Rust](http://www.jonathanturner.org/2015/11/learning-to-try-things-in-rust.html).
 
 ### 2.4 Iterating over the lines
 
-The `BufReader::lines()` method, called in line 21, returns the iterator over all the lines from this buffer. The resulted *line* is also wrapped by *Result* -- it's of the type `io::Result<String>`. In line 23 we just ignore the *Result* value by using the `unwrap()` method. It returns only the *String* object. The value of *Result* is forgotten. You can wonder why we just do that instead of the proper error handling like we discussed in 2.3 section. It's because I didn't found the scenario where the *Result Error* is returned. Even in [examples](https://doc.rust-lang.org/std/io/trait.BufRead.html#method.lines) the result value is ignored. **Usually calling *unwrap()* isn't the best solution, but [it's not always evil](https://doc.rust-lang.org/stable/book/error-handling.html#a-brief-interlude-unwrapping-isnt-evil).**
+The `BufReader::lines()` method returns the iterator over all the lines from this buffer. The resulted *line* is also wrapped by *Result* -- it's of the type `io::Result<String>`. In line 23 we just ignore the *Result* value by using the `unwrap()` method. It returns only the *String* object and the value of *Result* is forgotten. You can wonder why we just do that instead of the proper error handling like we discussed in 2.3 section. It's because I didn't found the scenario where the *Result Error* is returned. Even in [examples](https://doc.rust-lang.org/std/io/trait.BufRead.html#method.lines), the result value is ignored. **Usually calling *unwrap()* isn't the best solution, but [it's not always evil](https://doc.rust-lang.org/stable/book/error-handling.html#a-brief-interlude-unwrapping-isnt-evil).**
 
-#### Ownership is hard on the beggining
+#### Ownership is hard on the beginning
 The important observation comes with lines 24 and 25. The loaded line is printed (24) and then appended to the vector (25). It works. But if you swap the order of line 24 and 25 (first append to vector and then print), the code won't compile. Check it! You will get an error: `error: use of moved value: l`.
 
-I admit, I have seen such errors many times. Many, many times. It's very hard to get used to this **moved values**. The reason of this error is so called [ownership](https://doc.rust-lang.org/book/ownership.html). In a short words, the value becomes **moved** (and thus unusable) when it is passed to function "normally" or assigned (binded) to another object. This is quite complicated and wide topic. In many cases you can avoid the "moved values" by passing the value by [reference](https://doc.rust-lang.org/book/references-and-borrowing.html). Check also: [Why Rust's ownership/borrowing is hard](http://softwaremaniacs.org/blog/2016/02/12/ownership-borrowing-hard/en/).
+I admit, I have seen such errors many times. It's very hard to get used to this **moved values**. The reason for this error is so called [ownership](https://doc.rust-lang.org/book/ownership.html). In short words, the value becomes **moved** (and thus unusable) when it is passed to function directly or assigned (bound) to another object. This is quite complicated and wide topic. In many cases, you can avoid the moved values by passing them by [reference](https://doc.rust-lang.org/book/references-and-borrowing.html). 
 
-In line 32, the random secret line is returned, wrapped by the Result Ok. That's all what was needed for the first part of Hangman. The lines are read from file and one line is chosen and returned.
+Check also: [Why Rust's ownership/borrowing is hard](http://softwaremaniacs.org/blog/2016/02/12/ownership-borrowing-hard/en/).
+
+In line 32, the random secret line is returned, wrapped by the *Result Ok*. That's all that was needed for the first part of Hangman. The lines are read from the file and one line is chosen and returned.
 
 ## 3. Read user guess
 
-Let's start the interaction with user. He should type his guesses in a loop.
+Let's start the interaction with user. His job is typing a letter repeatedly until he discovers the whole secret word.
 
 {% gist b56baa97cb41cfd5bbbf %}
 
-Player is asked for typing a letter in line 16, and his input is read by function `read_guess()`. Pay attention to the return type of this function: `Option<char>`. If you know C++ the *Option* can remind you of [boost::optional](http://katecpp.github.io/boost-optional/). Such return type is recommended because the user answer can be invalid sometimes and it may not contain any letter.
+The user input is read by function `read_guess()`. The whole line is stored in *guess* variable (I didn't find a way to read only one char). Then the *guess* is *trim()*-ed, which removes any whitespaces from the line (in case the user typed the whitespaces before his guess) and then the first char is taken from resulted string. The [*nth()* method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.nth) returns the `Option<char>`, because the *nth* value may not exist. If you know C++ the *Option* can remind you of [boost::optional](http://katecpp.github.io/boost-optional/). 
 
-In line 34 we read the whole line that user types. I wanted to read only a single *char*, but I didn't find the way to do so. If you know how to do it better, let me know! The line is stored in variable *guess*. Then the *guess* is *trim()*-ed, which removes any whitespaces from the line (in case the user typed the whitespaces before his guess) and then the 0-th (first) char is taken from resulted string. The [*nth()* method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.nth) returns the `Option<char>`, because the nth value may not exist.
-
-The basic validation is done in *validate_user_guess* method, which generally only returns true when the user input was a letter and false in all other cases. In line 21 we unwrap the result because we already checked that we can do it.
+The basic validation is done in *validate_user_guess* method, which returns true if the first non-white sign was an alphabetical letter and false in all other cases. In line 21 we unwrap the resulted *user_guess* `Option<char>` (we know it's valid letter since the *validate_user_guess* returned true) and convert the letter to lowercase (the whole part `.to_lowercase().next().unwrap();` could be skipped if you want to distinguish the case).
 
 ## 4. Prepare structure for game data
 
-The game data can be kept together in a structure. 
 
-{% highlight rust %}
-struct GameData {
-    secret_line         : String, // the sentence to guess
-    discovered_letters  : String, // all letters given by player
-    lives               : i32,    // lives left until hangman dies
-    status              : String  // latest message to player
-}
-{% endhighlight %}
+
+
 
 Also an enum is introduced for deeper validation of user input. We already know that this is letter for sure, but this letter can be either already discovered (and should be skipped), or missed, or correctly discovered.
 
-{% highlight rust %}
-enum UserInputStatus {
-    AlreadyDiscovered,
-    LetterGuessed,
-    LetterMissed,
-}
 
-fn check_user_guess(gd: &GameData, user_guess: char) -> UserInputStatus
-{
-    if gd.discovered_letters.contains(user_guess)
-    {
-        return UserInputStatus::AlreadyDiscovered;
-    }
-
-    if !gd.secret_line.contains(user_guess)
-    {
-        return UserInputStatus::LetterMissed;
-    }
-
-    UserInputStatus::LetterGuessed
-}
-{% endhighlight %}
+We also need to print the secret word with guessed letters discovered and anothers hidden. For this purpose we create a function `format_masked_string`, which replaces all undiscovered letter with sign `_`. It also separates the letters with space for nicer look.
 
 
+Now we have all necessary mechanics. 
+
+{% gist 4c7f832a1071a7e804529ba29ad44c2b %}
 
 
 ## 5. Beautifying
