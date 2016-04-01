@@ -3,7 +3,7 @@ layout: post
 title:  "First program in Rust: Hangman"
 permalink: rust-hangman/
 date:   2016-04-01
-category: Rustlang
+category: rustlang
 tags: [hangman, tutorial]
 ---
 Rules of **Hangman game** should be well-known to everybody. The player is guessing a word or sentence letter by letter and if he manage to guess the whole secret sentence the hangman's life is saved. Here is the step by step solution of how I created a very simple Hangman game in Rust to play in the console.
