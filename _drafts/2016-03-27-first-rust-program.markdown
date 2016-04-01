@@ -42,7 +42,7 @@ Check also: [Day 1 of 24 days of Rust: Cargo](http://zsiciarz.github.io/24daysof
 
 ## 2. Input sentences
 
-The Hangman game requires some input sentences/words which the player will be guessing. I copied some English proverbs base to text file and removed commas and other punctuation marks. Proverbs are separated with newline sign. The program reads from such prepared file line by line and chooses randomly one line as a secret line to guess. The implementation is presented and discussed below.
+The Hangman game requires some input sentences/words which the player will be guessing. I copied some English proverbs base to text file and removed commas and other punctuation marks. Proverbs are separated with newline sign. The program reads from such [prepared file](https://github.com/katecpp/Hangman/blob/master/hangman/input.txt) line by line and chooses randomly one line as a secret line to guess. The implementation of choosing the secret line is presented and discussed below.
 
 {% gist c4265069706fe05b4736 %}
 
@@ -57,8 +57,13 @@ The crate must be also [linked](http://rustbyexample.com/crates/link.html) (line
 ### 2.2 Reading from file
 Reading the file requires the use declarations from lines 3--6. In the 17 line, two things are happening: the file *input.txt* is [opened](https://doc.rust-lang.org/std/fs/struct.File.html#method.open) and the result of this operation is processed by [**try! macro**](http://doc.rust-lang.org/std/result/index.html#the-try-macro). Then the opened file is passed to the [BufReader object](https://doc.rust-lang.org/std/io/struct.BufReader.html), which provides the methods for the line by line reading. The try! macro is a part of **error handling** in Rust. It does the job for the method call it wraps. Let's take a closer look at it.
 
-### 2.3 Error handling: try!
-The `File::open` method returns `Result<File>` instead of just `File`. When the given path does not exist it will return *Result Error*, otherwise it will return the *Result Ok* with the opened file object wrapped. To access this file you must do something with the wrapping Result. You can process it with *match*, and provide the path for both possible Results *Ok* and *Err*, like presented in [Rust by Example](http://rustbyexample.com/std_misc/file/open.html):
+### 2.3 Error handling
+
+One of the Rust main characteristics is safety, so it's not a surprise that the error handling in Rust is quite wide topic. In this short code snippet we already get in touch with `Result<Type>` and two different ways of handling it: **try! macro** and **unwrap/expect**.
+
+#### try! macro
+
+The `File::open` method returns `Result<File>` instead of just `File`. When the given path does not exist it will return *Result Error*, otherwise it will return the *Result Ok* wrapping the opened file. To access the file you must do something with this Result. You can process it with *match*, and provide the path for both possible Results *Ok* and *Err*, like presented in [Rust by Example](http://rustbyexample.com/std_misc/file/open.html):
 
 {% highlight rust %}
 let mut file = match File::open(&path) {
@@ -74,11 +79,15 @@ Unfortunately, this solution makes your code bigger.
 
 The **try! macro** handles the situation nicely, without increasing your code size. Here you can see [the code with and without the usage of try!](https://doc.rust-lang.org/std/macro.try!.html). With try! it's much nicer, don't you think?
 
+#### expect and unwrap
+
+The `File::open` is not the only one call here that return the *Result* type. We handle the *Results* also in the 12 line and 23 line with methods `unwrap` and `expect`. These both methods are basically the same and are used for uwrapping the object from the result, when you feel brave enough to ignore the *Result* value. The difference between `unwrap` and `expect` is that the latter one provide custom message when the unwrapping fails. This approach isn't the safest and can make your program panic! or abort. We will discuss it more in the next section.
+
 Check also: [Module std::result](https://doc.rust-lang.org/std/result/) and [Learning to 'try!' things in Rust](http://www.jonathanturner.org/2015/11/learning-to-try-things-in-rust.html).
 
 ### 2.4 Iterating over the lines
 
-The `BufReader::lines()` method returns the iterator over all the lines from this buffer. The resulted *line* is also wrapped by *Result* -- it's of the type `io::Result<String>`. In line 23 we just ignore the *Result* value by using the `unwrap()` method. It returns only the *String* object and the value of *Result* is forgotten. You can wonder why we just do that instead of the proper error handling like we discussed in 2.3 section. It's because I didn't found the scenario where the *Result Error* is returned. Even in [examples](https://doc.rust-lang.org/std/io/trait.BufRead.html#method.lines), the result value is ignored. **Usually calling *unwrap()* isn't the best solution, but [it's not always evil](https://doc.rust-lang.org/stable/book/error-handling.html#a-brief-interlude-unwrapping-isnt-evil).**
+The `BufReader::lines()` method returns the iterator over all the lines from this buffer. The resulted *line* is also wrapped by *Result* -- it's of the type `io::Result<String>`. In line 23 we just ignore the *Result* value by using the `unwrap()` method. It returns only the *String* object and the value of *Result* is forgotten. You can wonder why we don't do the proper error handling e.g. with try! macro. It's because I didn't found the scenario where the *Result Error* is returned. Even in [examples](https://doc.rust-lang.org/std/io/trait.BufRead.html#method.lines), the result value is ignored. **Usually calling *unwrap()* isn't the best solution, but [it's not always evil](https://doc.rust-lang.org/stable/book/error-handling.html#a-brief-interlude-unwrapping-isnt-evil).**
 
 #### Ownership is hard on the beginning
 The important observation comes with lines 24 and 25. The loaded line is printed (24) and then appended to the vector (25). It works. But if you swap the order of line 24 and 25 (first append to vector and then print), the code won't compile. Check it! You will get an error: `error: use of moved value: l`.
@@ -98,6 +107,10 @@ Let's start the interaction with user. His job is typing a letter repeatedly unt
 The user input is read by function `read_guess()`. The whole line is stored in *guess* variable (I didn't find a way to read only one char). Then the *guess* is *trim()*-ed, which removes any whitespaces from the line (in case the user typed the whitespaces before his guess) and then the first char is taken from resulted string. The [*nth()* method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.nth) returns the `Option<char>`, because the *nth* value may not exist. If you know C++ the *Option* can remind you of [boost::optional](http://katecpp.github.io/boost-optional/). 
 
 The basic validation is done in *validate_user_guess* method, which returns true if the first non-white sign was an alphabetical letter and false in all other cases. In line 21 we unwrap the resulted *user_guess* `Option<char>` (we know it's valid letter since the *validate_user_guess* returned true) and convert the letter to lowercase (the whole part `.to_lowercase().next().unwrap()` could be skipped if you want to distinguish the case).
+
+#### std::Option
+
+https://doc.rust-lang.org/std/option/
 
 ## 4. Prepare structure for game data
 
