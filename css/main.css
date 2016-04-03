@@ -281,6 +281,10 @@ img {
   margin: 30px 0;
 }
 
+.post-content .top-highlight {
+  background-color: yellow;
+}
+
 .post-content ul,
 .post-content ol { padding-left: 20px; }
 

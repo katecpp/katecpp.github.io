@@ -44,6 +44,8 @@ Check also: [Day 1 of 24 days of Rust: Cargo](http://zsiciarz.github.io/24daysof
 
 The Hangman game requires some input sentences/words which the player will be guessing. I copied some English proverbs base to text file and removed commas and other punctuation marks. Proverbs are separated with newline sign. The program reads from such [prepared file](https://github.com/katecpp/Hangman/blob/master/hangman/input.txt) line by line and chooses randomly one line as a secret line to guess. The implementation of choosing the secret line is presented and discussed below.
 
+<span class="top-highlight"> UPDATE: The implementation of get_random_line which is presented below is not optimal. Refer to [Get random line improved](#get-random-line-improved) for the improved solution.</span>
+
 {% gist c4265069706fe05b4736 %}
 
 ### 2.1 Random number
@@ -89,6 +91,12 @@ I admit, I have seen such errors many times. It's very hard to get used to this 
 Check also: [Why Rust's ownership/borrowing is hard](http://softwaremaniacs.org/blog/2016/02/12/ownership-borrowing-hard/en/).
 
 In line 32, the random secret line is returned, wrapped by the *Result Ok*. That's all that was needed for the first part of Hangman. The lines are read from the file and one line is chosen and returned.
+
+### 2.5 Get random line improved
+
+The proposed implementation of `get_random_line` requires **reading all sentences** from the file and **storing them in vector**, only to access the one random line after that. It's not very optimal and may cause problems if the sentence base is huge. It turned out that rand crate contains method which is more suitable for our needs: [rand::sample](https://doc.rust-lang.org/rand/rand/fn.sample.html). This function randomly chooses any amount of objects accessible through iterator. The improved implementation below.
+
+{% gist 66ed191683d2e7b04cb80bc348660bdb %}
 
 ## 3. Read user guess
 
