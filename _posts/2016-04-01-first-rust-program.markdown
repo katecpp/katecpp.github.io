@@ -44,7 +44,7 @@ Check also: [Day 1 of 24 days of Rust: Cargo](http://zsiciarz.github.io/24daysof
 
 The Hangman game requires some input sentences/words which the player will be guessing. I copied some English proverbs base to text file and removed commas and other punctuation marks. Proverbs are separated with newline sign. The program reads from such [prepared file](https://github.com/katecpp/Hangman/blob/master/hangman/input.txt) line by line and chooses randomly one line as a secret line to guess. The implementation of choosing the secret line is presented and discussed below.
 
-<span class="top-highlight"> UPDATE: The implementation of get_random_line which is presented below is not optimal. Refer to [Get random line improved](#get-random-line-improved) for the improved solution.</span>
+<span class="top-highlight"> UPDATE: The implementation of <i>get_random_line</i> which is presented below is not optimal. Refer to [Get random line improved](#get-random-line-improved) for the improved solution.</span>
 
 {% gist c4265069706fe05b4736 %}
 
