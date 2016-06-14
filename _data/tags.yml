@@ -3,6 +3,9 @@
 
 - slug: qt
   name: Qt
+
+- slug: qt-quick
+  name: Qt Quick
   
 - slug: inheritance
   name: inheritance
